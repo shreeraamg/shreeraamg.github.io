@@ -8,7 +8,7 @@ import { portfolio } from '../data/portfolio'
       <p class="section-label">Get in touch</p>
       <h2 class="contact-heading">Let's <span class="accent">connect.</span></h2>
       <p class="contact-sub">
-        I'm always open to discussing new opportunities, interesting projects, or just a good tech conversation.
+        Have an interesting project, a question, or just want to talk tech? Feel free to reach out.
       </p>
       <a href={`mailto:${portfolio.email}`} class="email-link">
         {portfolio.email}
@@ -26,6 +26,7 @@ import { portfolio } from '../data/portfolio'
     <div class="footer-links">
       <a href={portfolio.social.github} target="_blank" rel="noopener noreferrer">GitHub</a>
       <a href={portfolio.social.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href={portfolio.social.medium} target="_blank" rel="noopener noreferrer">Medium</a>
       <a href={`mailto:${portfolio.email}`}>Email</a>
     </div>
     <p class="footer-copy">Built with Astro · {new Date().getFullYear()}</p>

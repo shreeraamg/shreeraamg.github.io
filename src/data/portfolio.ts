@@ -7,6 +7,7 @@ export const portfolio = {
   social: {
     github: "https://github.com/shreeraamg",
     linkedin: "https://linkedin.com/in/shreeraam",
+    medium: "https://medium.com/@shreeraamg",
   },
 
   about: `Software engineer with two years of hands-on experience in back-end development.
@@ -14,15 +15,17 @@ Driven by a strong curiosity to learn, a focus on writing clean and reliable cod
 and a willingness to take on new challenges. I enjoy building scalable,
 event-driven systems in fast-paced collaborative environments.`,
 
+  interests: ["System Design", "Clean Code", "Event-Driven Architecture"],
+
   experience: [
     {
       company: "Tata Consultancy Services",
       role: "System Engineer",
-      duration: "Mar 2024 - Present",
+      duration: "Mar 2024 – Present",
       location: "Chennai",
       highlights: [
         "Built an event-driven data reconciliation microservice using KSQL and Kafka, eliminating manual reconciliation workflows.",
-        "Designed a centralised Gradle BOM to standardise dependencies across 80+ microservices, cutting upgrade effort by 90%.",
+        "Designed a centralised Gradle BOM to standardise dependencies across microservices, cutting upgrade effort by 90%.",
         "Developed composite GitHub Actions to abstract common CI/CD tasks, reducing workflow code by 20% across 100+ pipelines.",
         "Optimised MongoDB aggregation pipelines with targeted indexing, reducing API response times by 70%.",
       ],
@@ -64,11 +67,12 @@ event-driven systems in fast-paced collaborative environments.`,
       ],
     },
     {
-      category: "Frameworks",
+      category: "Frameworks & Libraries",
       items: [
         { name: "Spring Boot", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" },
         { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-        { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+        { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg", invert: true },
+        { name: "Micronaut", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/micronaut/micronaut-original.svg" },
       ],
     },
     {
@@ -77,6 +81,7 @@ event-driven systems in fast-paced collaborative environments.`,
         { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
         { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
         { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+        { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
       ],
     },
     {
@@ -85,13 +90,33 @@ event-driven systems in fast-paced collaborative environments.`,
         { name: "Azure", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
         { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
         { name: "Kubernetes", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" },
-        { name: "GitHub Actions", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+        { name: "Helm", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/helm/helm-original.svg" },
+        { name: "GitHub Actions", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg" },
+        { name: "Apigee", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apigee/apigee-original.svg" },
       ],
     },
     {
-      category: "Messaging",
+      category: "Messaging & Streaming",
       items: [
-        { name: "Kafka", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg" },
+        { name: "Kafka", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg", invert: true },
+      ],
+    },
+    {
+      category: "Tools & Platforms",
+      items: [
+        { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+        { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", invert: true },
+        { name: "Jira", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" },
+        { name: "GitHub Copilot", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubcopilot/githubcopilot-original.svg", invert: true },
+        { name: "Dynatrace", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dynatrace/dynatrace-original.svg" },
+        { name: "Snyk", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/snyk/snyk-original.svg" },
+      ],
+    },
+    {
+      category: "AI Tools",
+      items: [
+        { name: "GitHub Copilot", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubcopilot/githubcopilot-original.svg", invert: true },
+        { name: "Claude", icon: "" },
       ],
     },
   ],
@@ -102,6 +127,7 @@ event-driven systems in fast-paced collaborative environments.`,
       issuer: "GitHub",
       year: "2026",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+      invert: true,
       credentialUrl: "",
     },
     {

@@ -16,13 +16,16 @@ import { portfolio } from '../data/portfolio'
           <div class="skills-row">
             {group.items.map((skill) => (
               <div class="skill-pill">
-                <img
-                  src={skill.icon}
-                  alt={skill.name}
-                  width="20"
-                  height="20"
-                  loading="lazy"
-                />
+                {skill.icon && (
+                  <img
+                    src={skill.icon}
+                    alt={skill.name}
+                    width="20"
+                    height="20"
+                    loading="lazy"
+                    class={skill.invert ? 'invert-dark' : ''}
+                  />
+                )}
                 <span>{skill.name}</span>
               </div>
             ))}
@@ -94,5 +97,15 @@ import { portfolio } from '../data/portfolio'
     width: 18px;
     height: 18px;
     object-fit: contain;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .invert-dark {
+      filter: invert(1);
+    }
+  }
+
+  [data-theme="dark"] .invert-dark {
+    filter: invert(1);
   }
 </style>

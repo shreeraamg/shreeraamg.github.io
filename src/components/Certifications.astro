@@ -13,7 +13,7 @@ import { portfolio } from '../data/portfolio'
       {portfolio.certifications.map((cert) => (
         <div class="cert-card card fade-in">
           <div class="cert-icon">
-            <img src={cert.icon} alt={cert.issuer} width="32" height="32" loading="lazy" />
+            <img src={cert.icon} alt={cert.issuer} width="32" height="32" loading="lazy" class={cert.invert ? 'invert-dark' : ''} />
           </div>
           <div class="cert-info">
             <h3 class="cert-name">{cert.name}</h3>
@@ -119,5 +119,15 @@ import { portfolio } from '../data/portfolio'
 
   .cert-link:hover {
     color: var(--color-accent);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .invert-dark {
+      filter: invert(1);
+    }
+  }
+
+  [data-theme="dark"] .invert-dark {
+    filter: invert(1);
   }
 </style>
