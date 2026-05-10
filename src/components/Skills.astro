@@ -1,0 +1,98 @@
+---
+import { portfolio } from '../data/portfolio'
+---
+
+<section id="skills">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">Toolbox</p>
+      <h2 class="section-title">Skills</h2>
+    </div>
+
+    <div class="skills-groups">
+      {portfolio.skills.map((group) => (
+        <div class="skill-group fade-in">
+          <h3 class="group-label">{group.category}</h3>
+          <div class="skills-row">
+            {group.items.map((skill) => (
+              <div class="skill-pill">
+                <img
+                  src={skill.icon}
+                  alt={skill.name}
+                  width="20"
+                  height="20"
+                  loading="lazy"
+                />
+                <span>{skill.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    padding: 6rem 1.5rem;
+    background-color: var(--color-bg-secondary);
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    margin-bottom: 3rem;
+  }
+
+  .skills-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .skill-group {}
+
+  .group-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.875rem;
+  }
+
+  .skills-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+  }
+
+  .skill-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.875rem;
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 100px;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
+  }
+
+  .skill-pill:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text-primary);
+    transform: translateY(-2px);
+  }
+
+  .skill-pill img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
+</style>

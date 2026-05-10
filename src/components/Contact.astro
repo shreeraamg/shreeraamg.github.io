@@ -1,0 +1,127 @@
+---
+import { portfolio } from '../data/portfolio'
+---
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner fade-in">
+      <p class="section-label">Get in touch</p>
+      <h2 class="contact-heading">Let's <span class="accent">connect.</span></h2>
+      <p class="contact-sub">
+        I'm always open to discussing new opportunities, interesting projects, or just a good tech conversation.
+      </p>
+      <a href={`mailto:${portfolio.email}`} class="email-link">
+        {portfolio.email}
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <p class="footer-name">Shreeraam G</p>
+    <div class="footer-links">
+      <a href={portfolio.social.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href={portfolio.social.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href={`mailto:${portfolio.email}`}>Email</a>
+    </div>
+    <p class="footer-copy">Built with Astro · {new Date().getFullYear()}</p>
+  </div>
+</footer>
+
+<style>
+  section {
+    padding: 7rem 1.5rem;
+    text-align: center;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .contact-inner {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .contact-heading {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: var(--color-text-primary);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .contact-sub {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+
+  .email-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
+    padding-bottom: 2px;
+    transition: gap 0.2s, border-color 0.2s;
+  }
+
+  .email-link:hover {
+    gap: 0.75rem;
+    border-color: var(--color-accent);
+  }
+
+  footer {
+    padding: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover {
+    color: var(--color-accent);
+  }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+  }
+</style>
