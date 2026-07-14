@@ -1,7 +1,8 @@
 export const portfolio = {
   name: "Shreeraam G",
   role: "Software Engineer",
-  tagline: "Backend engineer who likes building scalable systems and clean code.",
+  tagline:
+    "Backend engineer who likes building scalable systems and clean code.",
   email: "shreeram0312@gmail.com",
   resumeUrl: "/resume.pdf",
   social: {
@@ -21,14 +22,15 @@ event-driven systems in fast-paced collaborative environments.`,
     {
       company: "Tata Consultancy Services",
       role: "System Engineer",
-      duration: "Mar 2024 – Present",
+      duration: "Mar 2024 - Present",
       location: "Chennai",
       highlights: [
-        "Built an event-driven data reconciliation microservice using KSQL and Kafka, eliminating manual reconciliation workflows.",
-        "Designed a centralised Gradle BOM to standardise dependencies across microservices, cutting upgrade effort by 90%.",
-        "Developed composite GitHub Actions to abstract common CI/CD tasks, reducing workflow code by 20% across 100+ pipelines.",
+        "Built an event-driven data reconciliation microservice using Kafka and KSQL to automatically validate upstream data against MongoDB records, eliminating manual reconciliation and enabling automated alerting for discrepancies.",
+        "Consolidated 60+ IBM ACE integration interfaces into a unified Spring Boot microservice, replacing per-interface codebases and images with Helm-templated environment variables and ConfigMap-rendered XSD/XSL files, eliminating new-codebase and new-image overhead per interface.",
+        "Designed a centralised Gradle BOM and a convention plugin to abstract version, configuration, and build logic across 10 repositories (80+ microservices), cutting upgrade effort by 80% and eliminating repeated per-service boilerplate.",
+        "Created an AI agent using GitHub Copilot that generates Bruno API collections and automated tests from Swagger files, eliminating manual API collection authoring and enabling automated post-deployment validation in CI/CD.",
+        "Eliminated CI/CD workflow duplication across 10 repositories by engineering reusable composite GitHub Actions and callable workflows with dynamic inputs and caching, cutting workflow code by 40% and build time by 30% across 150+ workflows.",
         "Optimised MongoDB aggregation pipelines with targeted indexing, reducing API response times by 70%.",
-        "Created an AI agent using GitHub Copilot that generates Bruno API collections and automated tests from Swagger files, enabling CI/CD pipeline integration for post-deployment API validation across environments.",
       ],
     },
   ],
@@ -39,59 +41,152 @@ event-driven systems in fast-paced collaborative environments.`,
     {
       category: "Languages",
       items: [
-        { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
-        { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
-        { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-        { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+        {
+          name: "Java",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+        },
+        {
+          name: "TypeScript",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+        },
+        {
+          name: "JavaScript",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+        },
+        {
+          name: "Python",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+        },
       ],
     },
     {
       category: "Frameworks & Libraries",
       items: [
-        { name: "Spring Boot", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" },
-        { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-        { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg", invert: true },
+        {
+          name: "Spring Boot",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg",
+        },
+        {
+          name: "React",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+        },
+        {
+          name: "Express",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg",
+          invert: true,
+        },
         { name: "Micronaut", icon: "" },
       ],
     },
     {
       category: "Databases",
       items: [
-        { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
-        { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
-        { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
-        { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
+        {
+          name: "MongoDB",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+        },
+        {
+          name: "PostgreSQL",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+        },
+        {
+          name: "MySQL",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+        },
+        {
+          name: "Redis",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg",
+        },
       ],
     },
     {
       category: "Cloud & DevOps",
       items: [
-        { name: "Azure", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
-        { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
-        { name: "Kubernetes", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" },
-        { name: "Helm", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/helm/helm-original.svg" },
-        { name: "GitHub Actions", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg" },
-        { name: "Apigee", icon: "" },
+        {
+          name: "Azure",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg",
+        },
+        {
+          name: "Docker",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+        },
+        {
+          name: "Kubernetes",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg",
+        },
+        {
+          name: "Helm",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/helm/helm-original.svg",
+        },
+        {
+          name: "GitHub Actions",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg",
+        },
+        {
+          name: "Apigee",
+          icon: "https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/gcp-apigee-api-platform/default.svg",
+        },
       ],
     },
     {
       category: "Messaging & Streaming",
       items: [
-        { name: "Kafka", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg", invert: true },
+        {
+          name: "Kafka",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg",
+          invert: true,
+        },
+        {
+          name: "Confluent",
+          icon: "https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/confluent/default.svg",
+          invert: true,
+        },
       ],
     },
     {
       category: "Tools & Platforms",
       items: [
-        { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
-        { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", invert: true },
-        { name: "Jira", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" },
-        { name: "GitHub Copilot", icon: "" },
-        { name: "Dynatrace", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dynatrace/dynatrace-original.svg" },
-        { name: "Snyk", icon: "" },
-        { name: "Gradle", icon: "" },
-        { name: "IntelliJ IDEA", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" },
-        { name: "VS Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
+        {
+          name: "Git",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+        },
+        {
+          name: "GitHub",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+          invert: true,
+        },
+        {
+          name: "Jira",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg",
+        },
+        {
+          name: "GitHub Copilot",
+          icon: "https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/github-copilot/default.svg",
+        },
+        {
+          name: "Dynatrace",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dynatrace/dynatrace-original.svg",
+        },
+        {
+          name: "Snyk",
+          icon: "https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/snyk/default.svg",
+        },
+        {
+          name: "Sonar",
+          icon: "https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/sonarqube-cloud/default.svg",
+        },
+        {
+          name: "Gradle",
+          icon: "https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/gradle/default.svg",
+        },
+        {
+          name: "IntelliJ IDEA",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg",
+        },
+        {
+          name: "VS Code",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
+        },
       ],
     },
   ],
