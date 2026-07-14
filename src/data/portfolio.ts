@@ -8,7 +8,6 @@ export const portfolio = {
   social: {
     github: "https://github.com/shreeraamg",
     linkedin: "https://linkedin.com/in/shreeraam",
-    medium: "https://medium.com/@shreeraamg",
   },
 
   about: `Software engineer with two years of hands-on experience in back-end development.
