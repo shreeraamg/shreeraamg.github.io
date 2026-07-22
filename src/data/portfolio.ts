@@ -193,19 +193,26 @@ event-driven systems in fast-paced collaborative environments.`,
 
   certifications: [
     {
-      name: "GitHub Foundations",
+      name: "GH-900: GitHub Foundations",
       issuer: "GitHub",
       year: "2026",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
       invert: true,
-      credentialUrl: "",
+      credentialUrl: "https://learn.microsoft.com/api/credentials/share/en-in/shreeraamg/21E346361B79191E?sharingId=C1AEA47DA68654E4",
+    },
+    {
+      name: "Relational to Document Model",
+      issuer: "MongoDB",
+      year: "2025",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+      credentialUrl: "https://www.credly.com/badges/831bfe1c-3af1-469a-b8e2-3c331889a0d7/public_url",
     },
     {
       name: "AZ-500: Azure Security Engineer Associate",
       issuer: "Microsoft",
       year: "2025",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg",
-      credentialUrl: "",
+      credentialUrl: "https://learn.microsoft.com/api/credentials/share/en-in/shreeraamg/63D9CD29B95DA053?sharingId=C1AEA47DA68654E4",
     },
     {
       name: "100x Devs Full Stack Web Development",
