@@ -35,7 +35,15 @@ event-driven systems in fast-paced collaborative environments.`,
     },
   ],
 
-  projects: [],
+  projects: [
+    {
+      name: "Life Grid",
+      description: "A GitHub-contribution-graph style life and age tracker used as a browser homepage.",
+      techStack: ["HTML", "CSS", "JavaScript"],
+      githubUrl: "https://github.com/shreeraamg/life-grid",
+      liveUrl: "https://life-grid-sigma.vercel.app/",
+    },
+  ],
 
   skills: [
     {
