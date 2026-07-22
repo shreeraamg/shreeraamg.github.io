@@ -11,7 +11,13 @@ import { portfolio } from '../data/portfolio'
 
     <div class="certs-grid">
       {portfolio.certifications.map((cert) => (
-        <div class="cert-card card fade-in">
+        <div
+          class="cert-card card fade-in"
+          role={cert.credentialUrl ? "link" : undefined}
+          tabindex={cert.credentialUrl ? "0" : undefined}
+          onclick={cert.credentialUrl ? `window.open("${cert.credentialUrl}", "_blank")` : undefined}
+          onkeypress={cert.credentialUrl ? `if (event.key === 'Enter' || event.key === ' ') { window.open("${cert.credentialUrl}", "_blank"); }` : undefined}
+        >
           <div class="cert-icon">
             <img src={cert.icon} alt={cert.issuer} width="32" height="32" loading="lazy" class={cert.invert ? 'invert-dark' : ''} />
           </div>
@@ -23,13 +29,6 @@ import { portfolio } from '../data/portfolio'
               <span class="cert-year">{cert.year}</span>
             </p>
           </div>
-          {cert.credentialUrl && (
-            <a href={cert.credentialUrl} target="_blank" rel="noopener noreferrer" class="cert-link" aria-label="View credential">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/>
-              </svg>
-            </a>
-          )}
         </div>
       ))}
     </div>
@@ -61,6 +60,19 @@ import { portfolio } from '../data/portfolio'
     align-items: center;
     gap: 1rem;
     padding: 1.125rem 1.25rem;
+  }
+
+  .cert-card {
+    cursor: default;
+  }
+
+  .cert-card[role="link"] {
+    cursor: pointer;
+  }
+
+  .cert-card[role="link"]:focus {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
   }
 
   .cert-icon {
@@ -111,15 +123,6 @@ import { portfolio } from '../data/portfolio'
     color: var(--color-border);
   }
 
-  .cert-link {
-    flex-shrink: 0;
-    color: var(--color-text-muted);
-    transition: color 0.2s;
-  }
-
-  .cert-link:hover {
-    color: var(--color-accent);
-  }
 
   @media (prefers-color-scheme: dark) {
     .invert-dark {
