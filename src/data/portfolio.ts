@@ -201,14 +201,6 @@ event-driven systems in fast-paced collaborative environments.`,
           icon: "https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/github-copilot/default.svg",
         },
         {
-          name: "Dynatrace",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dynatrace/dynatrace-original.svg",
-        },
-        {
-          name: "Snyk",
-          icon: "https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/snyk/default.svg",
-        },
-        {
           name: "Sonar",
           icon: "https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/sonarqube-cloud/default.svg",
         },
