@@ -1,5 +1,13 @@
 ---
 import { portfolio } from '../data/portfolio'
+
+function fmtMonthYear(d) {
+  if (!d) return '';
+  if (d === 'present') return 'Present';
+  const date = d instanceof Date ? d : new Date(d);
+  if (isNaN(date)) return '';
+  return date.toLocaleString('en-US', { month: 'short', year: 'numeric' });
+}
 ---
 
 <section id="experience">
@@ -19,7 +27,7 @@ import { portfolio } from '../data/portfolio'
                 <h3 class="job-role">{job.role}</h3>
                 <p class="job-company">{job.company} · {job.location}</p>
               </div>
-              <span class="job-duration">{job.duration}</span>
+              <span class="job-duration">{fmtMonthYear(job.startDate)} - {job.endDate === 'present' || job.endDate == null ? 'Present' : fmtMonthYear(job.endDate)}</span>
             </div>
             <ul class="job-highlights">
               {job.highlights.map((point) => (

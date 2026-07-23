@@ -1,5 +1,42 @@
 ---
 import { portfolio } from '../data/portfolio'
+
+// Compute years of experience from the earliest experience start date.
+// Fallbacks: if an experience entry doesn't provide `startDate`, try parsing the `duration` string (e.g., "Mar 2024 - Present").
+function parseStartDate(exp) {
+  if (exp.startDate) {
+    // handle Date objects or ISO strings
+    if (exp.startDate instanceof Date) return exp.startDate;
+    const d = new Date(exp.startDate);
+    return isNaN(d) ? null : d;
+  }
+  if (exp.duration) {
+    const parts = exp.duration.split('-').map((p) => p.trim());
+    if (parts.length) {
+      // Try parsing the first part (start)
+      const d = new Date(parts[0]);
+      if (!isNaN(d)) return d;
+      // try more forgiving parse for formats like "Mar 2024"
+      try {
+        const parsed = Date.parse(parts[0]);
+        const dd = new Date(parsed);
+        return isNaN(dd) ? null : dd;
+      } catch (e) {
+        return null;
+      }
+    }
+  }
+  return null;
+}
+
+const starts = portfolio.experience.map(parseStartDate).filter(Boolean);
+let yearsExperience = 0;
+if (starts.length) {
+  const earliest = starts.reduce((a, b) => (a < b ? a : b));
+  const now = new Date();
+  const months = (now.getFullYear() - earliest.getFullYear()) * 12 + (now.getMonth() - earliest.getMonth());
+  yearsExperience = Math.floor(months / 12);
+}
 ---
 
 <section id="about">
@@ -23,7 +60,7 @@ import { portfolio } from '../data/portfolio'
 
         <div class="about-stats">
           <div class="stat">
-            <span class="stat-number">2+</span>
+            <span class="stat-number">{yearsExperience >= 1 ? `${yearsExperience}+` : '<1'}</span>
             <span class="stat-label">Years experience</span>
           </div>
           <div class="stat">

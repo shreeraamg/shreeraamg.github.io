@@ -1,4 +1,28 @@
-export const portfolio = {
+export type Experience = {
+  company: string;
+  role: string;
+  startDate: Date;
+  endDate?: Date | 'present' | null;
+  location?: string;
+  highlights: string[];
+};
+
+export type Portfolio = {
+  name: string;
+  role: string;
+  tagline: string;
+  email: string;
+  resumeUrl?: string;
+  social?: Record<string, string>;
+  about?: string;
+  interests?: string[];
+  experience?: Experience[];
+  projects?: any[];
+  skills?: any[];
+  certifications?: any[];
+};
+
+export const portfolio: Portfolio = {
   name: "Shreeraam G",
   role: "Software Engineer",
   tagline:
@@ -21,7 +45,8 @@ event-driven systems in fast-paced collaborative environments.`,
     {
       company: "Tata Consultancy Services",
       role: "System Engineer",
-      duration: "Mar 2024 - Present",
+      startDate: new Date("2024-03-01"),
+      endDate: 'present',
       location: "Chennai",
       highlights: [
         "Built an event-driven data reconciliation microservice using Kafka and KSQL to automatically validate upstream data against MongoDB records, eliminating manual reconciliation and enabling automated alerting for discrepancies.",
