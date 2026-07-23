@@ -152,6 +152,10 @@ event-driven systems in fast-paced collaborative environments.`,
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/helm/helm-original.svg",
         },
         {
+          name: "Terraform",
+          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg",
+        },
+        {
           name: "GitHub Actions",
           icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg",
         },
