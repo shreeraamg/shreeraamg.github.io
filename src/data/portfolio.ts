@@ -222,6 +222,14 @@ event-driven systems in fast-paced collaborative environments.`,
 
   certifications: [
     {
+      name: "GH-300: GitHub Copilot",
+      issuer: "GitHub",
+      year: "2026",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+      invert: true,
+      credentialUrl: "https://learn.microsoft.com/api/credentials/share/en-gb/shreeraamg/B5C07F6DBF83195F?sharingId=C1AEA47DA68654E4",
+    },
+    {
       name: "GH-900: GitHub Foundations",
       issuer: "GitHub",
       year: "2026",
