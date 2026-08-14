@@ -201,10 +201,6 @@ event-driven systems in fast-paced collaborative environments.`,
           icon: "https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/github-copilot/default.svg",
         },
         {
-          name: "Sonar",
-          icon: "https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/sonarqube-cloud/default.svg",
-        },
-        {
           name: "Gradle",
           icon: "https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/gradle/default.svg",
         },
@@ -221,6 +217,13 @@ event-driven systems in fast-paced collaborative environments.`,
   ],
 
   certifications: [
+    {
+      name: "Claude Certified Developer - Foundations",
+      issuer: "Anthropic",
+      year: "2026",
+      icon: "https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/anthropic/default.svg",
+      credentialUrl: "https://www.credly.com/badges/3ebe19a3-1654-4872-849a-64fa4c518349/public_url",
+    },
     {
       name: "GH-300: GitHub Copilot",
       issuer: "GitHub",
