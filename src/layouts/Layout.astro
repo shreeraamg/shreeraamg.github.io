@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css'
+import { portfolio } from '../data/portfolio'
 
 interface Props {
   title?: string
@@ -10,6 +11,16 @@ const {
   title = "Shreeraam G — Software Engineer",
   description = "Backend engineer specialising in Java, Spring Boot, Kafka, and MongoDB. Building scalable event-driven systems."
 } = Astro.props
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: portfolio.name,
+  jobTitle: portfolio.role,
+  email: `mailto:${portfolio.email}`,
+  url: Astro.site?.toString(),
+  sameAs: Object.values(portfolio.social ?? {}),
+}
 ---
 
 <!doctype html>
@@ -23,10 +34,19 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.site} />
+    <meta property="og:site_name" content="Shreeraam G" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
 
     <title>{title}</title>
 
+    <link rel="canonical" href={Astro.site} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
 

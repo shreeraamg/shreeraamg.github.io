@@ -32,6 +32,8 @@ export const portfolio: Portfolio = {
   social: {
     github: "https://github.com/shreeraamg",
     linkedin: "https://linkedin.com/in/shreeraam",
+    leetcode: "https://leetcode.com/u/shreeraam-g/",
+    geeksforgeeks: "https://www.geeksforgeeks.org/profile/shreeraam_03?tab=activity",
   },
 
   about: `Software engineer with two years of hands-on experience in back-end development.
