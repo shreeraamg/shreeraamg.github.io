@@ -64,6 +64,12 @@ event-driven systems in fast-paced collaborative environments.`,
 
   projects: [
     {
+      name: "Distributed Order Fulfillment Platform",
+      description: "A choreographed saga across five Spring Boot microservices coordinated entirely through Kafka events, with per-service Postgres databases, OpenTelemetry observability, and Testcontainers-backed integration tests.",
+      techStack: ["Java", "Spring Boot", "Kafka", "PostgreSQL", "Docker", "Kubernetes", "Helm", "OpenTelemetry"],
+      githubUrl: "https://github.com/shreeraamg/distributed-order-fulfillment-platform",
+    },
+    {
       name: "Life Grid",
       description: "A GitHub-contribution-graph style life and age tracker used as a browser homepage.",
       techStack: ["HTML", "CSS", "JavaScript"],
