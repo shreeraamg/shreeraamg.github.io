@@ -17,10 +17,52 @@ export type Portfolio = {
   about?: string;
   interests?: string[];
   experience?: Experience[];
-  projects?: any[];
-  skills?: any[];
-  certifications?: any[];
+  projects?: Project[];
+  skills?: { category: string; items: { name: string; icon: string; invert?: boolean }[] }[];
+  certifications?: { name: string; issuer: string; year: string; icon: string; credentialUrl: string; invert?: boolean }[];
 };
+
+export type Project = {
+  id: 'order-platform' | 'life-grid';
+  name: string;
+  description: string;
+  techStack: string[];
+  githubUrl: string;
+  liveUrl?: string;
+};
+
+export const engineeringStudies = [
+  {
+    number: '01',
+    category: 'Integration architecture',
+    title: 'Consolidating 60+ integration interfaces',
+    constraint: '60+ IBM ACE integration interfaces meant maintaining separate codebases and images for individual interfaces.',
+    decision: 'Consolidated them into a unified Spring Boot microservice, using Helm-templated environment variables and ConfigMap-rendered XSD/XSL files.',
+    outcome: 'Eliminated the need for a new codebase and image for each interface.',
+    metric: '60+',
+    metricLabel: 'interfaces consolidated',
+  },
+  {
+    number: '02',
+    category: 'Developer experience',
+    title: 'Shared build tooling across 80+ services',
+    constraint: 'Version management, configuration, and build logic were repeated across 10 repositories covering 80+ microservices.',
+    decision: 'Built a centralised Gradle BOM and convention plugin to share dependency versions, configuration, and build logic.',
+    outcome: 'Cut version upgrade effort by 60% and eliminated repeated per-service boilerplate.',
+    metric: '60%',
+    metricLabel: 'less version upgrade effort',
+  },
+  {
+    number: '03',
+    category: 'Database performance',
+    title: 'Faster MongoDB-backed APIs',
+    constraint: 'MongoDB-backed APIs needed faster response times.',
+    decision: 'Optimised aggregation pipelines and added targeted indexing.',
+    outcome: 'Reduced API response times by 70%.',
+    metric: '70%',
+    metricLabel: 'lower API response times',
+  },
+];
 
 export const portfolio: Portfolio = {
   name: "Shreeraam G",
@@ -36,7 +78,7 @@ export const portfolio: Portfolio = {
     geeksforgeeks: "https://www.geeksforgeeks.org/profile/shreeraam_03?tab=activity",
   },
 
-  about: `Software engineer with two years of hands-on experience in back-end development.
+  about: `Software engineer focused on back-end development.
 Driven by a strong curiosity to learn, a focus on writing clean and reliable code,
 and a willingness to take on new challenges. I enjoy building scalable,
 event-driven systems in fast-paced collaborative environments.`,
@@ -64,12 +106,14 @@ event-driven systems in fast-paced collaborative environments.`,
 
   projects: [
     {
+      id: "order-platform",
       name: "Distributed Order Fulfillment Platform",
       description: "A choreographed saga across five Spring Boot microservices coordinated entirely through Kafka events, with per-service Postgres databases, OpenTelemetry observability, and Testcontainers-backed integration tests.",
       techStack: ["Java", "Spring Boot", "Kafka", "PostgreSQL", "Docker", "Kubernetes", "Helm", "OpenTelemetry"],
       githubUrl: "https://github.com/shreeraamg/distributed-order-fulfillment-platform",
     },
     {
+      id: "life-grid",
       name: "Life Grid",
       description: "A GitHub-contribution-graph style life and age tracker used as a browser homepage.",
       techStack: ["HTML", "CSS", "JavaScript"],

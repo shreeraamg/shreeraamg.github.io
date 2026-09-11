@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css'
 import { portfolio } from '../data/portfolio'
+import Navbar from '../components/Navbar.astro'
+import Footer from '../components/Footer.astro'
 
 interface Props {
   title?: string
@@ -11,6 +13,9 @@ const {
   title = "Shreeraam G — Software Engineer",
   description = "Backend engineer specialising in Java, Spring Boot, Kafka, and MongoDB. Building scalable event-driven systems."
 } = Astro.props
+
+const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/'
+const canonicalUrl = new URL(pathname === '/' ? '/' : `${pathname}/`, Astro.site ?? Astro.url.origin)
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -34,7 +39,7 @@ const personSchema = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.site} />
+    <meta property="og:url" content={canonicalUrl.href} />
     <meta property="og:site_name" content="Shreeraam G" />
 
     <meta name="twitter:card" content="summary" />
@@ -43,36 +48,22 @@ const personSchema = {
 
     <title>{title}</title>
 
-    <link rel="canonical" href={Astro.site} />
+    <link rel="canonical" href={canonicalUrl.href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
-
-    <script is:inline>
-      // Default site theme is dark unless the user explicitly saved a preference.
-      const saved = localStorage.getItem('theme')
-      const theme = saved || 'dark'
-      document.documentElement.setAttribute('data-theme', theme)
-    </script>
+    <meta name="theme-color" content="#f6f3eb" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
   </head>
-  <body>
-    <slot />
-
-    <script>
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible')
-            }
-          })
-        },
-        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-      )
-
-      document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el))
-    </script>
+  <body id="top">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Navbar />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>

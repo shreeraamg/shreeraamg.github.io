@@ -1,0 +1,35 @@
+---
+import { portfolio } from '../data/portfolio'
+---
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <a class="footer-name" href="/">{portfolio.name}<span>An engineer's field guide.</span></a>
+      <nav aria-label="Footer navigation">
+        <a href="/contact/">Get in touch</a>
+        <a href={portfolio.social?.github} target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
+        <a href={portfolio.social?.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
+      </nav>
+    </div>
+    <div class="footer-bottom eyebrow">
+      <p>&copy; {new Date().getFullYear()} Shreeraam G</p>
+      <a href="#top">Back to top <span aria-hidden="true">&#8593;</span></a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer { padding-block: 2rem 1.25rem; border-top: 1px solid var(--color-border); }
+  .footer-top { display: flex; justify-content: space-between; gap: 2rem; align-items: center; padding-bottom: 2rem; }
+  .footer-name { text-decoration: none; font-size: 1rem; font-weight: 500; }
+  .footer-name span { display: block; font-size: 0.875rem; font-weight: 400; color: var(--color-text-muted); }
+  nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+  nav a { font-size: 0.875rem; text-decoration: none; padding-block: 0.6rem; }
+  nav a:hover { text-decoration: underline; }
+  .footer-bottom { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--color-border); padding-top: 1.1rem; font-size: 0.75rem; }
+  .footer-bottom a { text-decoration: none; }
+  @media (max-width: 760px) {
+    .footer-top { flex-direction: column; align-items: start; gap: 1rem; }
+  }
+</style>

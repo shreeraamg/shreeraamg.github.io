@@ -1,186 +1,75 @@
 ---
 import { portfolio } from '../data/portfolio'
+import { navigation } from '../data/navigation'
+
+const currentPath = `${Astro.url.pathname.replace(/\/+$/, '')}/`
 ---
 
-<header id="navbar">
-  <nav>
-    <a href="#hero" class="nav-logo">SG</a>
-
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#certifications">Certifications</a></li>
-    </ul>
-
-    <div class="nav-actions">
-      <button class="nav-menu-btn" id="menu-toggle" aria-label="Toggle menu">
-        <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/>
-        </svg>
-        <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 6 6 18M6 6l12 12"/>
-        </svg>
-      </button>
+<header>
+  <nav class="container" aria-label="Main navigation">
+    <a class="identity" href="/" aria-label="Shreeraam G, home" aria-current={currentPath === '/' ? 'page' : undefined}>
+      <span class="monogram" aria-hidden="true">sg.</span>
+      <span class="identity-text">{portfolio.name}<small>An engineer's field guide</small></span>
+    </a>
+    <div class="nav-links">
+      {navigation.map(page => <a href={page.href} aria-current={currentPath === page.href ? 'page' : undefined}>{page.label}</a>)}
     </div>
+    <a href={portfolio.resumeUrl} class="resume">Resume <span aria-hidden="true">&#8599;</span></a>
   </nav>
-
-  <div class="mobile-menu" id="mobile-menu">
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#certifications">Certifications</a></li>
-    </ul>
-  </div>
 </header>
 
 <style>
   header {
-    position: fixed;
+    position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
     z-index: 100;
-    background-color: var(--color-bg-primary);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
+    background: var(--color-bg-primary);
+    border-bottom: 1px solid var(--color-border);
   }
-
-  header.scrolled {
-    border-bottom-color: var(--color-border);
-    backdrop-filter: blur(12px);
-    background-color: color-mix(in srgb, var(--color-bg-primary) 85%, transparent);
-  }
-
   nav {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    height: 64px;
+    min-height: 88px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1.5rem;
   }
-
-  .nav-logo {
+  .identity { display: flex; align-items: center; gap: 0.85rem; text-decoration: none; }
+  .monogram {
+    width: 41px;
+    height: 41px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--color-text-primary);
     font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: var(--color-accent);
-    letter-spacing: -0.02em;
-    transition: opacity 0.2s;
+    font-size: 1.6rem;
+    line-height: 1;
+    padding-top: 5px;
   }
-
-  .nav-logo:hover {
-    opacity: 0.8;
-  }
-
-  .nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-  }
-
+  .identity-text { font-size: 0.95rem; font-weight: 600; }
+  small { display: block; font-size: 0.75rem; color: var(--color-text-muted); font-weight: 400; }
+  .nav-links { display: flex; align-items: center; gap: 1.5rem; margin-left: auto; }
   .nav-links a {
-    font-size: 0.875rem;
-    font-weight: 400;
-    color: var(--color-text-secondary);
-    transition: color 0.2s ease;
-    position: relative;
+    padding-block: 0.75rem;
+    font-size: 0.95rem;
+    text-decoration: none;
+    text-underline-offset: 7px;
   }
-
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background-color: var(--color-accent);
-    transition: width 0.2s ease;
+  .nav-links a:hover { text-decoration: underline; }
+  .nav-links a[aria-current="page"] { color: var(--color-accent); text-decoration: underline; text-decoration-thickness: 2px; }
+  .identity[aria-current="page"] .monogram { border-color: var(--color-accent); color: var(--color-accent); }
+  .resume { color: var(--color-accent); font-size: 0.95rem; text-decoration: none; padding-block: 0.75rem; }
+  .resume:hover { text-decoration: underline; }
+  @media (max-width: 950px) {
+    nav { min-height: 0; flex-wrap: wrap; gap: 0.4rem; padding-block: 0.75rem 0.25rem; }
+    .identity { flex: 1; }
+    .nav-links { order: 1; width: 100%; justify-content: space-between; gap: 0.5rem; margin-left: 0; }
+    .nav-links a { font-size: 0.875rem; }
+    .resume { font-size: 0.875rem; }
+    .monogram { width: 34px; height: 34px; font-size: 1.35rem; }
   }
-
-  .nav-links a:hover {
-    color: var(--color-text-primary);
+  @media (max-width: 380px) {
+    .identity-text small { display: none; }
+    .identity-text { font-size: 0.875rem; }
+    .identity { gap: 0.5rem; }
   }
-
-  .nav-links a:hover::after {
-    width: 100%;
-  }
-
-  .nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  /* theme toggle removed from UI */
-
-  .nav-menu-btn {
-    display: none;
-    background: none;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    width: 36px;
-    height: 36px;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: var(--color-text-secondary);
-  }
-
-  .icon-close { display: none; }
-
-  .mobile-menu {
-    display: none;
-    padding: 1rem 1.5rem 1.5rem;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .mobile-menu ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .mobile-menu a {
-    font-size: 1rem;
-    color: var(--color-text-secondary);
-    transition: color 0.2s;
-  }
-
-  .mobile-menu a:hover {
-    color: var(--color-accent);
-  }
-
-  @media (max-width: 768px) {
-    .nav-links { display: none; }
-    .nav-menu-btn { display: flex; }
-  }
-
-  header.menu-open .mobile-menu { display: block; }
-  header.menu-open .icon-menu { display: none; }
-  header.menu-open .icon-close { display: block; }
 </style>
-
-<script>
-  const navbar = document.getElementById('navbar')!
-  const menuToggle = document.getElementById('menu-toggle')!
-
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 20)
-  })
-
-
-  menuToggle.addEventListener('click', () => {
-    navbar.classList.toggle('menu-open')
-  })
-
-  document.querySelectorAll('.mobile-menu a').forEach((link) => {
-    link.addEventListener('click', () => navbar.classList.remove('menu-open'))
-  })
-</script>
