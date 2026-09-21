@@ -5,8 +5,18 @@ import { getPublishedNotes } from "../../data/notes";
 
 const notes = await getPublishedNotes();
 const groups = [
-  { kind: "work", title: "Professional work", description: "Selected contributions and the engineering decisions behind them." },
-  { kind: "personal", title: "Personal projects", description: "Independent builds with public source and live links where available." },
+  {
+    kind: "work",
+    title: "Professional work",
+    description:
+      "Selected contributions and the engineering decisions behind them.",
+  },
+  {
+    kind: "personal",
+    title: "Personal projects",
+    description:
+      "Independent builds with public source and live links where available.",
+  },
 ] as const;
 ---
 
@@ -25,25 +35,49 @@ const groups = [
       </p>
     </div>
     {notes.length === 0 && <p>No engineering notes have been published yet.</p>}
-    {groups.map((group) => {
-      const entries = notes.filter((note) => note.data.kind === group.kind);
-      return entries.length > 0 && (
-        <section class="note-group" aria-labelledby={`${group.kind}-heading`}>
-          <h2 id={`${group.kind}-heading`}>{group.title}</h2>
-          <p class="group-description">{group.description}</p>
-          <div class="notes-grid">
-            {entries.map((note) => <NoteCard note={note} headingLevel="h3" />)}
-          </div>
-        </section>
-      );
-    })}
+    {
+      groups.map((group) => {
+        const entries = notes.filter((note) => note.data.kind === group.kind);
+        return (
+          entries.length > 0 && (
+            <section
+              class="note-group"
+              aria-labelledby={`${group.kind}-heading`}
+            >
+              <h2 id={`${group.kind}-heading`}>{group.title}</h2>
+              <p class="group-description">{group.description}</p>
+              <div class="notes-grid">
+                {entries.map((note) => (
+                  <NoteCard note={note} headingLevel="h3" />
+                ))}
+              </div>
+            </section>
+          )
+        );
+      })
+    }
   </section>
 </Layout>
 
 <style>
-  .section-heading { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
-  .note-group + .note-group { margin-top: 2.5rem; }
-  .note-group > h2 { font-size: 1.2rem; font-weight: 500; }
-  .group-description { color: var(--color-text-secondary); margin-block: 0.5rem 1.5rem; max-width: 65ch; }
-  .notes-grid { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .section-heading {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+  .note-group + .note-group {
+    margin-top: 2.5rem;
+  }
+  .note-group > h2 {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+  .group-description {
+    color: var(--color-text-secondary);
+    margin-block: 0.5rem 1.5rem;
+    max-width: 65ch;
+  }
+  .notes-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
 </style>

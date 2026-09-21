@@ -30,14 +30,23 @@ const { note, headingLevel: Heading = "h2" } = Astro.props;
     padding-block: 1.5rem;
     min-width: 0;
   }
-  h2, h3 {
+  h2,
+  h3 {
     font-family: var(--font-display);
     font-size: clamp(1.65rem, 2.5vw, 2rem);
     font-weight: 400;
     line-height: 1.2;
     margin-block: 0.75rem;
   }
-  .summary { color: var(--color-text-secondary); }
-  .outcome { margin-block: 1rem 0.5rem; }
-  .outcome strong { font-weight: 500; color: var(--color-accent); margin-right: 0.35rem; }
+  .summary {
+    color: var(--color-text-secondary);
+  }
+  .outcome {
+    margin-block: 1rem 0.5rem;
+  }
+  .outcome strong {
+    font-weight: 500;
+    color: var(--color-accent);
+    margin-right: 0.35rem;
+  }
 </style>

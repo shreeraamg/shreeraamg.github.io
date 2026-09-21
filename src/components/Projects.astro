@@ -37,13 +37,21 @@ const notes = await getPublishedNotes();
             <p class="stack">{project.techStack.join(" / ")}</p>
             <div class="project-links">
               {notes
-                .filter((note) => note.data.kind === "personal"
-                  && note.data.projectId === project.id
-                  && note.data.featured)
+                .filter(
+                  (note) =>
+                    note.data.kind === "personal" &&
+                    note.data.projectId === project.id &&
+                    note.data.featured,
+                )
                 .map((note) => (
                   <a href={`/notes/${note.id}/`} class="text-link">
-                    <span>Read the note<span class="sr-only">: {note.data.title}</span></span>
-                    <span class="arrow" aria-hidden="true"><ArrowUpRight /></span>
+                    <span>
+                      Read the note
+                      <span class="sr-only">: {note.data.title}</span>
+                    </span>
+                    <span class="arrow" aria-hidden="true">
+                      <ArrowUpRight />
+                    </span>
                   </a>
                 ))}
               <a

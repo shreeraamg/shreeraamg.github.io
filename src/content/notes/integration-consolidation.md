@@ -6,7 +6,17 @@ kind: work
 experienceId: tcs
 contribution: "Built a reusable Spring Boot HTTP-to-HTTP integration application and migrated 60+ interfaces to production, externalising interface settings and XSD/XSL resources through Helm and ConfigMaps."
 outcome: "60+ HTTP-to-HTTP interfaces migrated to production, with the same approach adopted for two additional production integration patterns."
-technologies: ["Java", "Spring Boot", "Docker", "Helm", "Kubernetes", "XSD", "XSLT", "Azure Service Bus"]
+technologies:
+  [
+    "Java",
+    "Spring Boot",
+    "Docker",
+    "Helm",
+    "Kubernetes",
+    "XSD",
+    "XSLT",
+    "Azure Service Bus",
+  ]
 published: true
 featured: true
 order: 1

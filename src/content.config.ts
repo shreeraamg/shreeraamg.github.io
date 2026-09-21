@@ -18,22 +18,30 @@ const commonFields = {
 const notes = defineCollection({
   loader: glob({ base: "./src/content/notes", pattern: "*.md" }),
   schema: z.discriminatedUnion("kind", [
-    z.object({
-      ...commonFields,
-      kind: z.literal("work"),
-      experienceId: z.string().refine(
-        (id) => portfolio.experience?.some((job) => job.id === id),
-        "Work notes must reference an existing experience ID.",
-      ),
-    }).strict(),
-    z.object({
-      ...commonFields,
-      kind: z.literal("personal"),
-      projectId: z.string().refine(
-        (id) => portfolio.projects?.some((project) => project.id === id),
-        "Personal notes must reference an existing project ID.",
-      ),
-    }).strict(),
+    z
+      .object({
+        ...commonFields,
+        kind: z.literal("work"),
+        experienceId: z
+          .string()
+          .refine(
+            (id) => portfolio.experience?.some((job) => job.id === id),
+            "Work notes must reference an existing experience ID.",
+          ),
+      })
+      .strict(),
+    z
+      .object({
+        ...commonFields,
+        kind: z.literal("personal"),
+        projectId: z
+          .string()
+          .refine(
+            (id) => portfolio.projects?.some((project) => project.id === id),
+            "Personal notes must reference an existing project ID.",
+          ),
+      })
+      .strict(),
   ]),
 });
 

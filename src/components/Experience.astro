@@ -13,7 +13,11 @@ const formatDate = (date: Date) =>
   });
 ---
 
-<section id="experience" class="chapter container" aria-labelledby="work-heading">
+<section
+  id="experience"
+  class="chapter container"
+  aria-labelledby="work-heading"
+>
   <div class="section-heading">
     <div>
       <p class="section-label">Professional work</p>
@@ -25,49 +29,68 @@ const formatDate = (date: Date) =>
     </p>
   </div>
 
-  {(portfolio.experience ?? []).map((job) => {
-    const selectedNotes = notes.filter(
-      (note) => note.data.kind === "work"
-        && note.data.experienceId === job.id
-        && note.data.featured,
-    );
-    return (
-      <section class="job" aria-labelledby={`job-${job.id}`}>
-        <div class="job-heading">
-          <div>
-            <h2 id={`job-${job.id}`}>{job.role}</h2>
-            <p class="company">{job.company}{job.location && ` / ${job.location}`}</p>
-          </div>
-          <p class="job-date">
-            <time datetime={job.startDate.toISOString().slice(0, 10)}>{formatDate(job.startDate)}</time>
-            {" "}&mdash;{" "}
-            {job.endDate instanceof Date
-              ? <time datetime={job.endDate.toISOString().slice(0, 10)}>{formatDate(job.endDate)}</time>
-              : "Present"}
-          </p>
-        </div>
-        <p class="job-summary">{job.summary}</p>
-
-        {selectedNotes.length > 0 && (
-          <div class="selected-work">
-            <p class="eyebrow">Selected contributions</p>
-            <div class="contributions">
-              {selectedNotes.map((note) => <NoteCard note={note} headingLevel="h3" />)}
+  {
+    (portfolio.experience ?? []).map((job) => {
+      const selectedNotes = notes.filter(
+        (note) =>
+          note.data.kind === "work" &&
+          note.data.experienceId === job.id &&
+          note.data.featured,
+      );
+      return (
+        <section class="job" aria-labelledby={`job-${job.id}`}>
+          <div class="job-heading">
+            <div>
+              <h2 id={`job-${job.id}`}>{job.role}</h2>
+              <p class="company">
+                {job.company}
+                {job.location && ` / ${job.location}`}
+              </p>
             </div>
+            <p class="job-date">
+              <time datetime={job.startDate.toISOString().slice(0, 10)}>
+                {formatDate(job.startDate)}
+              </time>{" "}
+              &mdash;{" "}
+              {job.endDate instanceof Date ? (
+                <time datetime={job.endDate.toISOString().slice(0, 10)}>
+                  {formatDate(job.endDate)}
+                </time>
+              ) : (
+                "Present"
+              )}
+            </p>
           </div>
-        )}
+          <p class="job-summary">{job.summary}</p>
 
-        {job.highlights.length > 0 && (
-          <details class="disclosure">
-            <summary>Full contribution list<span class="sr-only"> at {job.company}</span></summary>
-            <ul>
-              {job.highlights.map((highlight) => <li>{highlight}</li>)}
-            </ul>
-          </details>
-        )}
-      </section>
-    );
-  })}
+          {selectedNotes.length > 0 && (
+            <div class="selected-work">
+              <p class="eyebrow">Selected contributions</p>
+              <div class="contributions">
+                {selectedNotes.map((note) => (
+                  <NoteCard note={note} headingLevel="h3" />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {job.highlights.length > 0 && (
+            <details class="disclosure">
+              <summary>
+                Full contribution list
+                <span class="sr-only"> at {job.company}</span>
+              </summary>
+              <ul>
+                {job.highlights.map((highlight) => (
+                  <li>{highlight}</li>
+                ))}
+              </ul>
+            </details>
+          )}
+        </section>
+      );
+    })
+  }
 
   <div class="notes-link">
     <a href="/notes/" class="text-link">
@@ -78,26 +101,93 @@ const formatDate = (date: Date) =>
 </section>
 
 <style>
-  .job { border-top: 1px solid var(--color-border); padding-block: 2rem; }
-  .job-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem 2rem; }
-  .job h2 { font-family: var(--font-display); font-size: 2rem; font-weight: 400; line-height: 1.2; }
-  .company { color: var(--color-text-secondary); margin-top: 0.5rem; }
-  .job-date { font-size: 0.875rem; color: var(--color-text-secondary); flex-shrink: 0; }
-  .job-summary { max-width: 65ch; margin-block: 1.25rem 2rem; color: var(--color-text-secondary); }
-  .selected-work > .eyebrow { margin-bottom: 1rem; }
-  .contributions { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 2rem; }
-  .disclosure { margin-top: 1rem; }
-  ul { padding-left: 1.2rem; margin: 0 0 1.5rem; max-width: 85ch; list-style: disc; }
-  li { color: var(--color-text-secondary); margin-bottom: 0.8rem; padding-left: 0.35rem; }
-  li::marker { color: var(--color-accent); }
-  .notes-link { border-top: 1px solid var(--color-border); padding-top: 1.5rem; }
+  .job {
+    border-top: 1px solid var(--color-border);
+    padding-block: 2rem;
+  }
+  .job-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem 2rem;
+  }
+  .job h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+  .company {
+    color: var(--color-text-secondary);
+    margin-top: 0.5rem;
+  }
+  .job-date {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+  }
+  .job-summary {
+    max-width: 65ch;
+    margin-block: 1.25rem 2rem;
+    color: var(--color-text-secondary);
+  }
+  .selected-work > .eyebrow {
+    margin-bottom: 1rem;
+  }
+  .contributions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: 2rem;
+  }
+  .disclosure {
+    margin-top: 1rem;
+  }
+  ul {
+    padding-left: 1.2rem;
+    margin: 0 0 1.5rem;
+    max-width: 85ch;
+    list-style: disc;
+  }
+  li {
+    color: var(--color-text-secondary);
+    margin-bottom: 0.8rem;
+    padding-left: 0.35rem;
+  }
+  li::marker {
+    color: var(--color-accent);
+  }
+  .notes-link {
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.5rem;
+  }
   @media (min-width: 761px) {
-    ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.4rem 3rem; max-width: none; padding-left: 0; position: relative; }
-    ul::before { content: ""; position: absolute; inset-block: 0; left: 50%; border-left: 1px solid var(--color-border); }
-    li { margin-left: 1.2rem; }
+    ul {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.4rem 3rem;
+      max-width: none;
+      padding-left: 0;
+      position: relative;
+    }
+    ul::before {
+      content: "";
+      position: absolute;
+      inset-block: 0;
+      left: 50%;
+      border-left: 1px solid var(--color-border);
+    }
+    li {
+      margin-left: 1.2rem;
+    }
   }
   @media (max-width: 760px) {
-    .job-heading { flex-direction: column; gap: 0.75rem; }
-    .contributions { grid-template-columns: 1fr; gap: 0; }
+    .job-heading {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .contributions {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
   }
 </style>

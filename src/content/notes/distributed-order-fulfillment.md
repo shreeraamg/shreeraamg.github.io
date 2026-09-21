@@ -6,7 +6,15 @@ kind: personal
 projectId: order-platform
 contribution: "Built five Spring Boot microservices coordinated through Kafka events, with per-service databases, observability, and integration tests."
 outcome: "A working project combining a choreographed saga, per-service PostgreSQL, OpenTelemetry, and Testcontainers-backed tests."
-technologies: ["Java", "Spring Boot", "Kafka", "PostgreSQL", "OpenTelemetry", "Testcontainers"]
+technologies:
+  [
+    "Java",
+    "Spring Boot",
+    "Kafka",
+    "PostgreSQL",
+    "OpenTelemetry",
+    "Testcontainers",
+  ]
 published: true
 featured: true
 order: 4

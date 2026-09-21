@@ -24,9 +24,13 @@ const currentPath = `${Astro.url.pathname.replace(/\/+$/, "")}/`;
         navigation.map((page) => (
           <a
             href={page.href}
-            aria-current={currentPath === page.href
-              ? "page"
-              : currentPath.startsWith(page.href) ? "location" : undefined}
+            aria-current={
+              currentPath === page.href
+                ? "page"
+                : currentPath.startsWith(page.href)
+                  ? "location"
+                  : undefined
+            }
           >
             {page.label}
           </a>
