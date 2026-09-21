@@ -61,9 +61,8 @@ const parentLabel = data.kind === "work" ? "Experience" : "Projects";
         </section>
         {data.kind === "work" ? (
           <aside class="publication-note" aria-label="Publication scope">
-            A high-level account of professional work. Internal source code,
-            private data, and organisation-specific implementation details are
-            not published here.
+            Source code is proprietary and cannot be shared. This write-up
+            focuses on the engineering approach and outcomes.
           </aside>
         ) : project && (
           <div class="project-links" aria-label="Project resources">
@@ -106,8 +105,7 @@ const parentLabel = data.kind === "work" ? "Experience" : "Projects";
 
 <style>
   .breadcrumbs { display: flex; flex-wrap: wrap; gap: 0.75rem; font-size: 0.875rem; margin-bottom: 2rem; color: var(--color-text-secondary); }
-  .note-header { max-width: 850px; margin-bottom: 2.5rem; }
-  h1 { max-width: 25ch; }
+  .note-header { margin-bottom: 2.5rem; }
   .note-summary { font-size: 1.15rem; color: var(--color-text-secondary); margin-block: 1.25rem 0.75rem; max-width: 60ch; }
   .context { font-size: 0.875rem; color: var(--color-text-muted); }
   .note-grid { display: grid; grid-template-columns: minmax(0, 750px) minmax(180px, 1fr); gap: 4rem; align-items: start; }

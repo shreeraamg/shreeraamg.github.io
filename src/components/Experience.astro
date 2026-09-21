@@ -70,7 +70,6 @@ const formatDate = (date: Date) =>
   })}
 
   <div class="notes-link">
-    <p>Work notes describe the approach and outcomes without publishing internal code or private system details.</p>
     <a href="/notes/" class="text-link">
       <span>Browse all engineering notes</span>
       <span class="arrow" aria-hidden="true"><ArrowUpRight /></span>
@@ -86,14 +85,17 @@ const formatDate = (date: Date) =>
   .job-date { font-size: 0.875rem; color: var(--color-text-secondary); flex-shrink: 0; }
   .job-summary { max-width: 65ch; margin-block: 1.25rem 2rem; color: var(--color-text-secondary); }
   .selected-work > .eyebrow { margin-bottom: 1rem; }
-  .contributions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; }
+  .contributions { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 2rem; }
   .disclosure { margin-top: 1rem; }
   ul { padding-left: 1.2rem; margin: 0 0 1.5rem; max-width: 85ch; list-style: disc; }
   li { color: var(--color-text-secondary); margin-bottom: 0.8rem; padding-left: 0.35rem; }
   li::marker { color: var(--color-accent); }
   .notes-link { border-top: 1px solid var(--color-border); padding-top: 1.5rem; }
-  .notes-link p { color: var(--color-text-secondary); font-size: 0.875rem; max-width: 75ch; margin-bottom: 0.5rem; }
-  @media (max-width: 950px) { .contributions { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 761px) {
+    ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.4rem 3rem; max-width: none; padding-left: 0; position: relative; }
+    ul::before { content: ""; position: absolute; inset-block: 0; left: 50%; border-left: 1px solid var(--color-border); }
+    li { margin-left: 1.2rem; }
+  }
   @media (max-width: 760px) {
     .job-heading { flex-direction: column; gap: 0.75rem; }
     .contributions { grid-template-columns: 1fr; gap: 0; }

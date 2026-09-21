@@ -64,5 +64,3 @@ Reusing an image does not remove interface-specific testing. Configuration, tran
 Separate deployments preserve independent rollout and scaling boundaries, but a change to shared application code still needs compatibility checks across its consumers. Reuse reduces duplicated packaging; it does not make all integrations identical.
 
 Externalised files also need an explicit update strategy. A configuration change should not be described as automatic hot reloading unless the application actually supports it.
-
-This note describes the approach at a high level. Internal source code, configuration values, payloads, and system diagrams are not included.

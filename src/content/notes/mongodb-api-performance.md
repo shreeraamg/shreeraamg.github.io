@@ -33,5 +33,3 @@ This note does not publish the internal query shapes, datasets, baseline timings
 ## Design considerations
 
 Indexing has trade-offs: additional indexes consume storage and add work to writes. A useful performance improvement needs to fit the workload, not just make an isolated query faster.
-
-The public description is deliberately limited to the contribution and its reported outcome. Internal schemas, queries, and data are not included.

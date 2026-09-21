@@ -75,7 +75,7 @@ event-driven systems in fast-paced collaborative environments.`,
       highlights: [
         "Built an event-driven data reconciliation microservice using Kafka and KSQL to automatically validate upstream data against MongoDB records, eliminating manual reconciliation and enabling automated alerting for discrepancies.",
         "Migrated 60+ HTTP-to-HTTP interfaces to production using a reusable Spring Boot image with independent Helm deployments and externalised configuration/XSD/XSL resources; the same approach was also adopted in production for Azure Service Bus-to-HTTP and HTTP-to-Azure Service Bus integrations.",
-        "Designed a centralised Gradle BOM and a convention plugin to abstract version management, configuration, and build logic across 10 repositories (80+ microservices), cutting version upgrade effort by 60% and eliminating repeated per-service boilerplate.",
+        "Designed shared Gradle tooling using version catalogs, a BOM, and a convention plugin to centralise dependency management and build logic across 10 repositories (80+ microservices), cutting version-upgrade effort by 60% and reducing repeated per-service build boilerplate.",
         "Created an AI agent using GitHub Copilot that generates Bruno API collections and automated tests from Swagger files, eliminating manual API collection authoring and enabling automated post-deployment validation in CI/CD.",
         "Eliminated CI/CD workflow duplication across 10 repositories by engineering reusable composite GitHub Actions and callable workflows with dynamic inputs and caching, cutting workflow code by 40% and build time by 30% across 150+ workflows.",
         "Optimised MongoDB aggregation pipelines with targeted indexing, reducing API response times by 70%.",
