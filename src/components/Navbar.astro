@@ -1,20 +1,39 @@
 ---
-import { portfolio } from '../data/portfolio'
-import { navigation } from '../data/navigation'
+import { portfolio } from "../data/portfolio";
+import { navigation } from "../data/navigation";
+import ArrowUpRight from "./ArrowUpRight.astro";
 
-const currentPath = `${Astro.url.pathname.replace(/\/+$/, '')}/`
+const currentPath = `${Astro.url.pathname.replace(/\/+$/, "")}/`;
 ---
 
 <header>
   <nav class="container" aria-label="Main navigation">
-    <a class="identity" href="/" aria-label="Shreeraam G, home" aria-current={currentPath === '/' ? 'page' : undefined}>
+    <a
+      class="identity"
+      href="/"
+      aria-label="Shreeraam G, home"
+      aria-current={currentPath === "/" ? "page" : undefined}
+    >
       <span class="monogram" aria-hidden="true">sg.</span>
-      <span class="identity-text">{portfolio.name}<small>An engineer's field guide</small></span>
+      <span class="identity-text"
+        >{portfolio.name}<small>An engineer's field guide</small></span
+      >
     </a>
     <div class="nav-links">
-      {navigation.map(page => <a href={page.href} aria-current={currentPath === page.href ? 'page' : undefined}>{page.label}</a>)}
+      {
+        navigation.map((page) => (
+          <a
+            href={page.href}
+            aria-current={currentPath === page.href ? "page" : undefined}
+          >
+            {page.label}
+          </a>
+        ))
+      }
     </div>
-    <a href={portfolio.resumeUrl} class="resume">Resume <span aria-hidden="true">&#8599;</span></a>
+    <a href={portfolio.resumeUrl} class="resume"
+      >Resume <span aria-hidden="true"><ArrowUpRight /></span></a
+    >
   </nav>
 </header>
 
@@ -33,7 +52,12 @@ const currentPath = `${Astro.url.pathname.replace(/\/+$/, '')}/`
     justify-content: space-between;
     gap: 1.5rem;
   }
-  .identity { display: flex; align-items: center; gap: 0.85rem; text-decoration: none; }
+  .identity {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    text-decoration: none;
+  }
   .monogram {
     width: 41px;
     height: 41px;
@@ -45,31 +69,87 @@ const currentPath = `${Astro.url.pathname.replace(/\/+$/, '')}/`
     line-height: 1;
     padding-top: 5px;
   }
-  .identity-text { font-size: 0.95rem; font-weight: 600; }
-  small { display: block; font-size: 0.75rem; color: var(--color-text-muted); font-weight: 400; }
-  .nav-links { display: flex; align-items: center; gap: 1.5rem; margin-left: auto; }
+  .identity-text {
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  small {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-left: auto;
+  }
   .nav-links a {
     padding-block: 0.75rem;
     font-size: 0.95rem;
     text-decoration: none;
     text-underline-offset: 7px;
   }
-  .nav-links a:hover { text-decoration: underline; }
-  .nav-links a[aria-current="page"] { color: var(--color-accent); text-decoration: underline; text-decoration-thickness: 2px; }
-  .identity[aria-current="page"] .monogram { border-color: var(--color-accent); color: var(--color-accent); }
-  .resume { color: var(--color-accent); font-size: 0.95rem; text-decoration: none; padding-block: 0.75rem; }
-  .resume:hover { text-decoration: underline; }
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+  .nav-links a[aria-current="page"] {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+  }
+  .identity[aria-current="page"] .monogram {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+  .resume {
+    color: var(--color-accent);
+    font-size: 0.95rem;
+    text-decoration: none;
+    padding-block: 0.75rem;
+  }
+  .resume:hover {
+    text-decoration: underline;
+  }
   @media (max-width: 950px) {
-    nav { min-height: 0; flex-wrap: wrap; gap: 0.4rem; padding-block: 0.75rem 0.25rem; }
-    .identity { flex: 1; }
-    .nav-links { order: 1; width: 100%; justify-content: space-between; gap: 0.5rem; margin-left: 0; }
-    .nav-links a { font-size: 0.875rem; }
-    .resume { font-size: 0.875rem; }
-    .monogram { width: 34px; height: 34px; font-size: 1.35rem; }
+    nav {
+      min-height: 0;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      padding-block: 0.75rem 0.25rem;
+    }
+    .identity {
+      flex: 1;
+    }
+    .nav-links {
+      order: 1;
+      width: 100%;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-left: 0;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+    }
+    .resume {
+      font-size: 0.875rem;
+    }
+    .monogram {
+      width: 34px;
+      height: 34px;
+      font-size: 1.35rem;
+    }
   }
   @media (max-width: 380px) {
-    .identity-text small { display: none; }
-    .identity-text { font-size: 0.875rem; }
-    .identity { gap: 0.5rem; }
+    .identity-text small {
+      display: none;
+    }
+    .identity-text {
+      font-size: 0.875rem;
+    }
+    .identity {
+      gap: 0.5rem;
+    }
   }
 </style>

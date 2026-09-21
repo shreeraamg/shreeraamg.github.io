@@ -1,66 +1,170 @@
 <figure class="order-flow" aria-labelledby="flow-caption">
   <div class="figure-label">Order fulfillment / Event flow</div>
   <ol class="flow-nodes" aria-label="Conceptual event flow">
-    <li data-flow-node><span class="node-number">01</span><span>Order</span><small>A request begins</small></li>
-    <li data-flow-node><span class="node-number">02</span><span>Kafka</span><small>An event is published</small></li>
-    <li data-flow-node><span class="node-number">03</span><span>Reaction</span><small>A service responds</small></li>
-    <li data-flow-node><span class="node-number">04</span><span>Next event</span><small>The saga continues</small></li>
+    <li data-flow-node>
+      <span class="node-number">01</span><span>Order</span><small
+        >A request begins</small
+      >
+    </li>
+    <li data-flow-node>
+      <span class="node-number">02</span><span>Kafka</span><small
+        >An event is published</small
+      >
+    </li>
+    <li data-flow-node>
+      <span class="node-number">03</span><span>Reaction</span><small
+        >A service responds</small
+      >
+    </li>
+    <li data-flow-node>
+      <span class="node-number">04</span><span>Next event</span><small
+        >The saga continues</small
+      >
+    </li>
   </ol>
-  <figcaption id="flow-caption">Five services, coordinated through events rather than a central orchestrator. A conceptual flow, not the full topology.</figcaption>
+  <figcaption id="flow-caption">
+    Five services, coordinated through events rather than a central
+    orchestrator. A conceptual flow, not the full topology.
+  </figcaption>
   <div class="flow-controls">
-    <button type="button" id="trace-order" aria-controls="trace-status" hidden>Trace an order <span aria-hidden="true">&#8594;</span></button>
-    <p id="trace-status" role="status" aria-live="polite" aria-atomic="true">Each service owns its data. Events carry the work forward.</p>
+    <button type="button" id="trace-order" aria-controls="trace-status" hidden
+      >Trace an order <span aria-hidden="true">&#8594;</span></button
+    >
+    <p id="trace-status" role="status" aria-live="polite" aria-atomic="true">
+      Each service owns its data. Events carry the work forward.
+    </p>
   </div>
 </figure>
 
 <script>
-  const button = document.querySelector<HTMLButtonElement>('#trace-order')
-  const status = document.querySelector<HTMLParagraphElement>('#trace-status')
-  const nodes = document.querySelectorAll<HTMLElement>('[data-flow-node]')
+  const button = document.querySelector<HTMLButtonElement>("#trace-order");
+  const status = document.querySelector<HTMLParagraphElement>("#trace-status");
+  const nodes = document.querySelectorAll<HTMLElement>("[data-flow-node]");
   const steps = [
-    '1 of 4: An order starts the workflow.',
-    '2 of 4: A Kafka event communicates the change.',
-    '3 of 4: A participating service reacts using its own database.',
-    '4 of 4: A subsequent event carries the saga forward.',
-  ]
-  let step = -1
+    "1 of 4: An order starts the workflow.",
+    "2 of 4: A Kafka event communicates the change.",
+    "3 of 4: A participating service reacts using its own database.",
+    "4 of 4: A subsequent event carries the saga forward.",
+  ];
+  let step = -1;
 
   if (button && status && nodes.length === steps.length) {
-    button.hidden = false
-    button.addEventListener('click', () => {
-      step = (step + 1) % steps.length
+    button.hidden = false;
+    button.addEventListener("click", () => {
+      step = (step + 1) % steps.length;
       nodes.forEach((node, index) => {
-        node.classList.toggle('is-active', index === step)
-        node.classList.toggle('is-complete', index < step)
-        if (index === step) node.setAttribute('aria-current', 'step')
-        else node.removeAttribute('aria-current')
-      })
-      status.textContent = steps[step]
-      button.textContent = step === steps.length - 1 ? 'Trace again \u21bb' : 'Next event \u2192'
-    })
+        node.classList.toggle("is-active", index === step);
+        node.classList.toggle("is-complete", index < step);
+        if (index === step) node.setAttribute("aria-current", "step");
+        else node.removeAttribute("aria-current");
+      });
+      status.textContent = steps[step];
+      button.textContent =
+        step === steps.length - 1 ? "Trace again \u21bb" : "Next event \u2192";
+    });
   }
 </script>
 
 <style>
-  .order-flow { background: var(--color-bg-secondary); border: 1px solid var(--color-border); padding: 1.5rem; }
-  .flow-nodes { padding: 0; margin: 2.5rem 0 1.5rem; list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4rem; }
-  li { min-width: 0; position: relative; border-top: 1px solid #9b9f8f; padding-top: 1rem; }
-  li:not(:last-child)::after { content: '\2192'; position: absolute; top: -0.9rem; right: -1.15rem; color: var(--color-text-muted); }
-  li span { display: block; font-size: 0.95rem; }
-  .node-number { font-family: var(--font-mono); color: var(--color-text-muted); font-size: 0.75rem; margin-bottom: 0.5rem; }
-  li small { display: block; font-size: 0.8rem; color: var(--color-text-secondary); margin-top: 0.3rem; }
-  li.is-active { border-top: 2px solid var(--color-accent); color: var(--color-accent); animation: signal 450ms ease-out; }
-  li.is-active .node-number { color: var(--color-accent); }
-  li.is-complete { border-color: var(--color-accent); }
-  figcaption { font-size: 0.875rem; color: var(--color-text-secondary); max-width: 52ch; }
-  .flow-controls { border-top: 1px solid var(--color-border); margin-top: 1.25rem; padding-top: 1rem; }
-  button { background: transparent; border: 1px solid var(--color-accent); color: var(--color-accent); padding: 0.55rem 0.8rem; font-size: 0.875rem; min-height: 44px; }
-  button:hover { background: #eaddcf; }
-  #trace-status { margin-top: 0.8rem; font-size: 0.875rem; min-height: 3rem; color: var(--color-text-secondary); }
-  @keyframes signal { from { background: #e9ccba; } to { background: transparent; } }
+  .order-flow {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    padding: 1.5rem;
+  }
+  .flow-nodes {
+    padding: 0;
+    margin: 2.5rem 0 1.5rem;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.4rem;
+  }
+  li {
+    min-width: 0;
+    position: relative;
+    border-top: 1px solid #9b9f8f;
+    padding-top: 1rem;
+  }
+  li:not(:last-child)::after {
+    content: "\2192";
+    position: absolute;
+    top: -0.9rem;
+    right: -1.15rem;
+    color: var(--color-text-muted);
+  }
+  li span {
+    display: block;
+    font-size: 0.95rem;
+  }
+  .node-number {
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+  li small {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.3rem;
+  }
+  li.is-active {
+    border-top: 2px solid var(--color-accent);
+    color: var(--color-accent);
+    animation: signal 450ms ease-out;
+  }
+  li.is-active .node-number {
+    color: var(--color-accent);
+  }
+  li.is-complete {
+    border-color: var(--color-accent);
+  }
+  figcaption {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    max-width: 52ch;
+  }
+  .flow-controls {
+    border-top: 1px solid var(--color-border);
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+  }
+  button {
+    background: transparent;
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
+    padding: 0.55rem 0.8rem;
+    font-size: 0.875rem;
+    min-height: 44px;
+  }
+  button:hover {
+    background: #eaddcf;
+  }
+  #trace-status {
+    margin-top: 0.8rem;
+    font-size: 0.875rem;
+    min-height: 3rem;
+    color: var(--color-text-secondary);
+  }
+  @keyframes signal {
+    from {
+      background: #e9ccba;
+    }
+    to {
+      background: transparent;
+    }
+  }
   @media (min-width: 761px) and (max-width: 1100px), (max-width: 480px) {
-    .order-flow { padding: 1rem; }
-    .flow-nodes { grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
-    li:nth-child(2)::after { content: none; }
+    .order-flow {
+      padding: 1rem;
+    }
+    .flow-nodes {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    li:nth-child(2)::after {
+      content: none;
+    }
   }
 </style>

@@ -46,11 +46,17 @@ main > .chapter:first-child {
   border-top: 0;
 }
 
-h1, h2, h3, p, figure {
+h1,
+h2,
+h3,
+p,
+figure {
   margin: 0;
 }
 
-button, a, summary {
+button,
+a,
+summary {
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -68,7 +74,8 @@ a:hover {
   color: var(--color-accent);
 }
 
-button, summary {
+button,
+summary {
   cursor: pointer;
 }
 
@@ -82,7 +89,8 @@ button, summary {
   color: #282b25;
 }
 
-img, svg {
+img,
+svg {
   max-width: 100%;
 }
 
@@ -111,7 +119,9 @@ img, svg {
   min-width: 0;
 }
 
-.eyebrow, .section-label, .figure-label {
+.eyebrow,
+.section-label,
+.figure-label {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 400;
@@ -120,7 +130,8 @@ img, svg {
   letter-spacing: 0.07em;
 }
 
-.eyebrow, .figure-label {
+.eyebrow,
+.figure-label {
   color: var(--color-text-muted);
 }
 
@@ -210,8 +221,14 @@ img, svg {
 }
 
 @keyframes open-note {
-  from { opacity: 0.6; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0.6;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 950px) {
@@ -243,17 +260,34 @@ img, svg {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
     animation: none !important;
     transition: none !important;
   }
 }
 
 @media print {
-  body { background: white; color: black; }
-  .container { width: 100%; }
-  .chapter { padding-block: 2rem; }
-  header, .skip-link, button { display: none !important; }
-  a { text-decoration: underline; }
+  body {
+    background: white;
+    color: black;
+  }
+  .container {
+    width: 100%;
+  }
+  .chapter {
+    padding-block: 2rem;
+  }
+  header,
+  .skip-link,
+  button {
+    display: none !important;
+  }
+  a {
+    text-decoration: underline;
+  }
 }

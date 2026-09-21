@@ -1,59 +1,181 @@
 ---
-import { portfolio } from '../data/portfolio'
-import OrderFlow from './OrderFlow.astro'
+import { portfolio } from "../data/portfolio";
+import OrderFlow from "./OrderFlow.astro";
+import ArrowUpRight from "./ArrowUpRight.astro";
 ---
 
-<section id="projects" class="chapter container" aria-labelledby="projects-heading">
+<section
+  id="projects"
+  class="chapter container"
+  aria-labelledby="projects-heading"
+>
   <div class="section-heading">
     <div>
       <p class="section-label">Personal work</p>
       <h1 id="projects-heading" class="section-title">Projects</h1>
     </div>
-    <p class="section-intro">Things I've built outside work, from distributed systems to a small tool for everyday perspective.</p>
+    <p class="section-intro">
+      Things I've built outside work, from distributed systems to a small tool
+      for everyday perspective.
+    </p>
   </div>
   <div class="projects">
-    {(portfolio.projects ?? []).map((project, index) => (
-      <article class="project reading-grid" data-project={project.id} aria-labelledby={`${project.id}-heading`}>
-        <div class="project-copy">
-          <p class="eyebrow">Project / 0{index + 1}</p>
-          <h2 id={`${project.id}-heading`}>{project.name}</h2>
-          <p class="description">{project.description}</p>
-          <p class="stack">{project.techStack.join(' / ')}</p>
-          <div class="project-links">
-            <a href={project.githubUrl} class="text-link" target="_blank" rel="noopener noreferrer"><span>View source<span class="sr-only"> for {project.name} (opens in a new tab)</span></span><span class="arrow" aria-hidden="true">&#8599;</span></a>
-            {project.liveUrl && <a href={project.liveUrl} class="text-link" target="_blank" rel="noopener noreferrer"><span>Open project<span class="sr-only">: {project.name} (opens in a new tab)</span></span><span class="arrow" aria-hidden="true">&#8599;</span></a>}
+    {
+      (portfolio.projects ?? []).map((project, index) => (
+        <article
+          class="project reading-grid"
+          data-project={project.id}
+          aria-labelledby={`${project.id}-heading`}
+        >
+          <div class="project-copy">
+            <p class="eyebrow">Project / 0{index + 1}</p>
+            <h2 id={`${project.id}-heading`}>{project.name}</h2>
+            <p class="description">{project.description}</p>
+            <p class="stack">{project.techStack.join(" / ")}</p>
+            <div class="project-links">
+              <a
+                href={project.githubUrl}
+                class="text-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <>
+                  <span>
+                    View source
+                    <span class="sr-only">
+                      {" "}
+                      for {project.name} (opens in a new tab)
+                    </span>
+                  </span>
+                  <span class="arrow" aria-hidden="true">
+                    <ArrowUpRight />
+                  </span>
+                </>
+              </a>
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  class="text-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>
+                    Open project
+                    <span class="sr-only">
+                      : {project.name} (opens in a new tab)
+                    </span>
+                  </span>
+                  <span class="arrow" aria-hidden="true">
+                    <ArrowUpRight />
+                  </span>
+                </a>
+              )}
+            </div>
           </div>
-        </div>
-        <div class="project-visual">
-          {project.id === 'order-platform' ? <OrderFlow /> : (
-            <figure class="life-preview">
-              <div class="figure-label">Life Grid / A little perspective</div>
-              <div class="life-preview-cells" aria-hidden="true">
-                {Array.from({ length: 156 }, (_, i) => <span class:list={{ filled: i < 61, current: i === 61 }} />)}
-              </div>
-              <figcaption>A life, one small square at a time.<small>Illustrative grid &mdash; not personal age data.</small></figcaption>
-            </figure>
-          )}
-        </div>
-      </article>
-    ))}
+          <div class="project-visual">
+            {project.id === "order-platform" ? (
+              <OrderFlow />
+            ) : (
+              <figure class="life-preview">
+                <div class="figure-label">Life Grid / A little perspective</div>
+                <div class="life-preview-cells" aria-hidden="true">
+                  {Array.from({ length: 156 }, (_, i) => (
+                    <span class:list={{ filled: i < 61, current: i === 61 }} />
+                  ))}
+                </div>
+                <figcaption>
+                  A life, one small square at a time.
+                  <small>
+                    Illustrative grid &mdash; not personal age data.
+                  </small>
+                </figcaption>
+              </figure>
+            )}
+          </div>
+        </article>
+      ))
+    }
   </div>
 </section>
 
 <style>
-  .project { padding-block: 2.5rem; border-top: 1px solid var(--color-border); }
-  .project:last-child { padding-bottom: 0; }
-  h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 3vw, 2.4rem); line-height: 1.15; font-weight: 400; margin-block: 0.75rem 1rem; max-width: 24ch; letter-spacing: -0.02em; }
-  .description { font-size: 1rem; color: var(--color-text-secondary); max-width: 52ch; }
-  .stack { font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.9; color: var(--color-text-secondary); margin-top: 1.25rem; }
-  .project-links { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1.1rem; }
-  .life-preview { border: 1px solid var(--color-border); padding: 1.5rem; background: #eceee4; }
-  .life-preview-cells { display: grid; grid-template-columns: repeat(13, minmax(0, 1fr)); gap: 5px; margin: 1.5rem auto; max-width: 280px; }
-  .life-preview-cells > span { aspect-ratio: 1; border: 1px solid #c6ccba; background: #e1e5d8; }
-  .life-preview-cells > .filled { background: #7d8769; border-color: #7d8769; }
-  .life-preview-cells > .filled:nth-child(3n) { background: #a4ad8b; border-color: #a4ad8b; }
-  .life-preview-cells > .current { background: var(--color-accent); border-color: var(--color-accent); }
-  figcaption { font-family: var(--font-display); font-size: 1.35rem; }
-  figcaption small { display: block; font-family: var(--font-body); font-size: 0.8rem; color: var(--color-text-secondary); margin-top: 0.5rem; }
-  @media (max-width: 760px) { .project { padding-block: 2rem; } }
+  .project {
+    padding-block: 2.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .project:last-child {
+    padding-bottom: 0;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 3vw, 2.4rem);
+    line-height: 1.15;
+    font-weight: 400;
+    margin-block: 0.75rem 1rem;
+    max-width: 24ch;
+    letter-spacing: -0.02em;
+  }
+  .description {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    max-width: 52ch;
+  }
+  .stack {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.9;
+    color: var(--color-text-secondary);
+    margin-top: 1.25rem;
+  }
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.1rem;
+  }
+  .life-preview {
+    border: 1px solid var(--color-border);
+    padding: 1.5rem;
+    background: #eceee4;
+  }
+  .life-preview-cells {
+    display: grid;
+    grid-template-columns: repeat(13, minmax(0, 1fr));
+    gap: 5px;
+    margin: 1.5rem auto;
+    max-width: 280px;
+  }
+  .life-preview-cells > span {
+    aspect-ratio: 1;
+    border: 1px solid #c6ccba;
+    background: #e1e5d8;
+  }
+  .life-preview-cells > .filled {
+    background: #7d8769;
+    border-color: #7d8769;
+  }
+  .life-preview-cells > .filled:nth-child(3n) {
+    background: #a4ad8b;
+    border-color: #a4ad8b;
+  }
+  .life-preview-cells > .current {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+  figcaption {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+  }
+  figcaption small {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.5rem;
+  }
+  @media (max-width: 760px) {
+    .project {
+      padding-block: 2rem;
+    }
+  }
 </style>
