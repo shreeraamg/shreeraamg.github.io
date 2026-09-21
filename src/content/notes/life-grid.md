@@ -7,8 +7,8 @@ projectId: life-grid
 contribution: "Built a life and age tracker using HTML, CSS, and JavaScript."
 outcome: "A hosted browser-homepage tool with a public source repository."
 technologies: ["HTML", "CSS", "JavaScript"]
-published: true
-featured: true
+published: false
+featured: false
 order: 5
 ---
 

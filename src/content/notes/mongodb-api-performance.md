@@ -7,8 +7,8 @@ experienceId: tcs
 contribution: "Optimised MongoDB aggregation pipelines and added targeted indexing."
 outcome: "Reduced response times by 70% for the APIs involved in this optimisation."
 technologies: ["MongoDB", "Aggregation pipelines", "Indexing"]
-published: true
-featured: true
+published: false
+featured: false
 order: 3
 ---
 
