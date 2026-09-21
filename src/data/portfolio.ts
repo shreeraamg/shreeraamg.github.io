@@ -1,6 +1,8 @@
 export type Experience = {
+  id: string;
   company: string;
   role: string;
+  summary: string;
   startDate: Date;
   endDate?: Date | "present" | null;
   location?: string;
@@ -41,45 +43,6 @@ export type Project = {
   liveUrl?: string;
 };
 
-export const engineeringStudies = [
-  {
-    number: "01",
-    category: "Integration architecture",
-    title: "Consolidating 60+ integration interfaces",
-    constraint:
-      "60+ IBM ACE integration interfaces meant maintaining separate codebases and images for individual interfaces.",
-    decision:
-      "Consolidated them into a unified Spring Boot microservice, using Helm-templated environment variables and ConfigMap-rendered XSD/XSL files.",
-    outcome:
-      "Eliminated the need for a new codebase and image for each interface.",
-    metric: "60+",
-    metricLabel: "interfaces consolidated",
-  },
-  {
-    number: "02",
-    category: "Developer experience",
-    title: "Shared build tooling across 80+ services",
-    constraint:
-      "Version management, configuration, and build logic were repeated across 10 repositories covering 80+ microservices.",
-    decision:
-      "Built a centralised Gradle BOM and convention plugin to share dependency versions, configuration, and build logic.",
-    outcome:
-      "Cut version upgrade effort by 60% and eliminated repeated per-service boilerplate.",
-    metric: "60%",
-    metricLabel: "less version upgrade effort",
-  },
-  {
-    number: "03",
-    category: "Database performance",
-    title: "Faster MongoDB-backed APIs",
-    constraint: "MongoDB-backed APIs needed faster response times.",
-    decision: "Optimised aggregation pipelines and added targeted indexing.",
-    outcome: "Reduced API response times by 70%.",
-    metric: "70%",
-    metricLabel: "lower API response times",
-  },
-];
-
 export const portfolio: Portfolio = {
   name: "Shreeraam G",
   role: "Software Engineer",
@@ -101,14 +64,17 @@ event-driven systems in fast-paced collaborative environments.`,
 
   experience: [
     {
+      id: "tcs",
       company: "Tata Consultancy Services",
       role: "System Engineer",
+      summary:
+        "Backend engineering across integration services, developer tooling, data quality, and API performance.",
       startDate: new Date("2024-03-01"),
       endDate: "present",
       location: "Chennai",
       highlights: [
         "Built an event-driven data reconciliation microservice using Kafka and KSQL to automatically validate upstream data against MongoDB records, eliminating manual reconciliation and enabling automated alerting for discrepancies.",
-        "Consolidated 60+ IBM ACE integration interfaces into a unified Spring Boot microservice, replacing per-interface codebases and images with Helm-templated environment variables and ConfigMap-rendered XSD/XSL files, eliminating new-codebase and new-image overhead per interface.",
+        "Migrated 60+ HTTP-to-HTTP interfaces to production using a reusable Spring Boot image with independent Helm deployments and externalised configuration/XSD/XSL resources; the same approach was also adopted in production for Azure Service Bus-to-HTTP and HTTP-to-Azure Service Bus integrations.",
         "Designed a centralised Gradle BOM and a convention plugin to abstract version management, configuration, and build logic across 10 repositories (80+ microservices), cutting version upgrade effort by 60% and eliminating repeated per-service boilerplate.",
         "Created an AI agent using GitHub Copilot that generates Bruno API collections and automated tests from Swagger files, eliminating manual API collection authoring and enabling automated post-deployment validation in CI/CD.",
         "Eliminated CI/CD workflow duplication across 10 repositories by engineering reusable composite GitHub Actions and callable workflows with dynamic inputs and caching, cutting workflow code by 40% and build time by 30% across 150+ workflows.",

@@ -24,7 +24,9 @@ const currentPath = `${Astro.url.pathname.replace(/\/+$/, "")}/`;
         navigation.map((page) => (
           <a
             href={page.href}
-            aria-current={currentPath === page.href ? "page" : undefined}
+            aria-current={currentPath === page.href
+              ? "page"
+              : currentPath.startsWith(page.href) ? "location" : undefined}
           >
             {page.label}
           </a>
@@ -94,7 +96,7 @@ const currentPath = `${Astro.url.pathname.replace(/\/+$/, "")}/`;
   .nav-links a:hover {
     text-decoration: underline;
   }
-  .nav-links a[aria-current="page"] {
+  .nav-links a[aria-current] {
     color: var(--color-accent);
     text-decoration: underline;
     text-decoration-thickness: 2px;

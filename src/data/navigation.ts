@@ -3,13 +3,19 @@ export const navigation = [
     href: "/experience/",
     label: "Experience",
     description:
-      "My professional work and the engineering decisions behind it.",
+      "My roles, selected contributions, and the outcomes of my work.",
   },
   {
     href: "/projects/",
     label: "Projects",
     description:
       "Independent builds, experiments, and things made out of curiosity.",
+  },
+  {
+    href: "/notes/",
+    label: "Notes",
+    description:
+      "The problems, decisions, and details behind selected work and personal builds.",
   },
   {
     href: "/about/",

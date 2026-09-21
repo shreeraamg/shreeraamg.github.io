@@ -7,11 +7,13 @@ import Footer from "../components/Footer.astro";
 interface Props {
   title?: string;
   description?: string;
+  pageType?: "website" | "article";
 }
 
 const {
   title = "Shreeraam G - Software Engineer",
   description = "Backend engineer specialising in Java, Spring Boot, Kafka, and MongoDB. Building scalable event-driven systems.",
+  pageType = "website",
 } = Astro.props;
 
 const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
@@ -41,7 +43,7 @@ const personSchema = {
 
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={pageType} />
     <meta property="og:url" content={canonicalUrl.href} />
     <meta property="og:site_name" content="Shreeraam G" />
 

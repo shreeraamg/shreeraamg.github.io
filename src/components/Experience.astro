@@ -1,6 +1,10 @@
 ---
-import { engineeringStudies, portfolio } from "../data/portfolio";
+import { portfolio } from "../data/portfolio";
+import { getPublishedNotes } from "../data/notes";
+import NoteCard from "./NoteCard.astro";
+import ArrowUpRight from "./ArrowUpRight.astro";
 
+const notes = await getPublishedNotes();
 const formatDate = (date: Date) =>
   date.toLocaleDateString("en-US", {
     month: "short",
@@ -9,320 +13,89 @@ const formatDate = (date: Date) =>
   });
 ---
 
-<section
-  id="experience"
-  class="chapter container"
-  aria-labelledby="work-heading"
->
+<section id="experience" class="chapter container" aria-labelledby="work-heading">
   <div class="section-heading">
     <div>
       <p class="section-label">Professional work</p>
       <h1 id="work-heading" class="section-title">Experience</h1>
     </div>
     <p class="section-intro">
-      My work in backend engineering, with a closer look at a few problems I've
-      helped solve.
+      My roles, selected contributions, and their outcomes. For the engineering
+      decisions behind a contribution, follow its detailed note.
     </p>
   </div>
 
-  <div class="career-record">
-    {
-      (portfolio.experience ?? []).map((job) => (
-        <div class="job">
-          <div class="job-heading reading-grid">
-            <div>
-              <>
-                <h2>{job.role}</h2>
-                <p>
-                  {job.company} / {job.location}
-                </p>
-              </>
-            </div>
-            <p class="job-date">
-              {formatDate(job.startDate)} &mdash;{" "}
-              {job.endDate instanceof Date
-                ? formatDate(job.endDate)
-                : "Present"}
-            </p>
+  {(portfolio.experience ?? []).map((job) => {
+    const selectedNotes = notes.filter(
+      (note) => note.data.kind === "work"
+        && note.data.experienceId === job.id
+        && note.data.featured,
+    );
+    return (
+      <section class="job" aria-labelledby={`job-${job.id}`}>
+        <div class="job-heading">
+          <div>
+            <h2 id={`job-${job.id}`}>{job.role}</h2>
+            <p class="company">{job.company}{job.location && ` / ${job.location}`}</p>
           </div>
+          <p class="job-date">
+            <time datetime={job.startDate.toISOString().slice(0, 10)}>{formatDate(job.startDate)}</time>
+            {" "}&mdash;{" "}
+            {job.endDate instanceof Date
+              ? <time datetime={job.endDate.toISOString().slice(0, 10)}>{formatDate(job.endDate)}</time>
+              : "Present"}
+          </p>
+        </div>
+        <p class="job-summary">{job.summary}</p>
+
+        {selectedNotes.length > 0 && (
+          <div class="selected-work">
+            <p class="eyebrow">Selected contributions</p>
+            <div class="contributions">
+              {selectedNotes.map((note) => <NoteCard note={note} headingLevel="h3" />)}
+            </div>
+          </div>
+        )}
+
+        {job.highlights.length > 0 && (
           <details class="disclosure">
-            <summary>View all contributions</summary>
+            <summary>Full contribution list<span class="sr-only"> at {job.company}</span></summary>
             <ul>
-              {job.highlights.map((highlight) => (
-                <li>{highlight}</li>
-              ))}
+              {job.highlights.map((highlight) => <li>{highlight}</li>)}
             </ul>
           </details>
-        </div>
-      ))
-    }
-  </div>
+        )}
+      </section>
+    );
+  })}
 
-  <div class="studies">
-    {
-      engineeringStudies.map((study, index) => (
-        <article class="study reading-grid">
-          <div class="study-copy">
-            <p class="eyebrow">
-              <span class="study-number">{study.number}</span> /{" "}
-              {study.category}
-            </p>
-            <h2>{study.title}</h2>
-            <p class="study-description">{study.constraint}</p>
-            <p class="study-outcome">{study.outcome}</p>
-            <details class="disclosure">
-              <summary>
-                Read the engineering note
-                <span class="sr-only">: {study.title}</span>
-              </summary>
-              <dl>
-                <>
-                  <dt>The decision</dt>
-                  <dd>{study.decision}</dd>
-                </>
-              </dl>
-            </details>
-          </div>
-          {index === 0 ? (
-            <figure class="integration-figure">
-              <div class="figure-label">Integration / Before &amp; after</div>
-              <div class="comparison">
-                <div class="before">
-                  <p class="eyebrow">Before</p>
-                  <div class="interface-grid" aria-hidden="true">
-                    {Array.from({ length: 12 }, () => (
-                      <span />
-                    ))}
-                  </div>
-                  <p>
-                    Per-interface
-                    <br />
-                    codebases &amp; images
-                  </p>
-                </div>
-                <span class="converge" aria-hidden="true">
-                  &#8594;
-                </span>
-                <div class="after">
-                  <p class="eyebrow">After</p>
-                  <div class="unified" aria-hidden="true">
-                    <span>1</span>
-                    <small>shared service</small>
-                  </div>
-                  <p>
-                    Configuration-driven
-                    <br />
-                    integration
-                  </p>
-                </div>
-              </div>
-              <figcaption>
-                <strong>{study.metric}</strong>
-                <span>
-                  {study.metricLabel}
-                  <small>
-                    Conceptual illustration, not internal architecture.
-                  </small>
-                </span>
-              </figcaption>
-            </figure>
-          ) : (
-            <div class="study-metric">
-              <strong>{study.metric}</strong>
-              <span>{study.metricLabel}</span>
-            </div>
-          )}
-        </article>
-      ))
-    }
+  <div class="notes-link">
+    <p>Work notes describe the approach and outcomes without publishing internal code or private system details.</p>
+    <a href="/notes/" class="text-link">
+      <span>Browse all engineering notes</span>
+      <span class="arrow" aria-hidden="true"><ArrowUpRight /></span>
+    </a>
   </div>
 </section>
 
 <style>
-  .study {
-    padding-block: 2.5rem;
-    border-top: 1px solid var(--color-border);
-  }
-  .study:last-child {
-    padding-bottom: 0;
-  }
-  .study-number {
-    color: var(--color-accent);
-  }
-  .study h2 {
-    font-family: var(--font-display);
-    font-size: clamp(1.9rem, 3vw, 2.4rem);
-    font-weight: 400;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    margin-block: 1rem;
-    max-width: 24ch;
-  }
-  .study-description {
-    font-size: 1rem;
-    color: var(--color-text-secondary);
-    margin-bottom: 1rem;
-    max-width: 52ch;
-  }
-  .study-outcome {
-    font-size: 1rem;
-    margin-bottom: 1.25rem;
-    max-width: 52ch;
-  }
-  .disclosure {
-    border-bottom: 0;
-  }
-  dl {
-    margin: 0 0 1rem;
-    font-size: 1rem;
-  }
-  dt {
-    color: var(--color-accent);
-    font-size: 0.75rem;
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    margin-block: 1rem 0.4rem;
-  }
-  dd {
-    margin: 0;
-    color: var(--color-text-secondary);
-  }
-  .integration-figure {
-    border: 1px solid var(--color-border);
-    background: var(--color-bg-secondary);
-    padding: 1.5rem;
-  }
-  .comparison {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 1rem;
-    align-items: center;
-    padding-block: 2rem;
-    text-align: center;
-  }
-  .comparison p:not(.eyebrow) {
-    font-size: 0.875rem;
-    color: var(--color-text-secondary);
-  }
-  .interface-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 5px;
-    height: 83px;
-    margin: 1rem auto;
-    max-width: 122px;
-  }
-  .interface-grid span {
-    background: #e1dfd4;
-    border: 1px solid #a7aa9a;
-  }
-  .unified {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border: 1px solid var(--color-accent);
-    background: #eddfd2;
-    height: 83px;
-    margin: 1rem auto;
-    max-width: 122px;
-    color: var(--color-accent);
-  }
-  .unified span {
-    font-family: var(--font-display);
-    font-size: 2rem;
-    line-height: 1;
-  }
-  .unified small {
-    font-size: 0.75rem;
-    margin-top: 0.4rem;
-  }
-  .converge {
-    color: var(--color-accent);
-    font-size: 1.5rem;
-  }
-  figcaption {
-    border-top: 1px solid var(--color-border);
-    padding-top: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  figcaption strong,
-  .study-metric strong {
-    font-family: var(--font-display);
-    font-size: 3rem;
-    font-weight: 400;
-    line-height: 1;
-    color: var(--color-accent);
-  }
-  figcaption span {
-    font-size: 0.95rem;
-  }
-  figcaption small {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--color-text-muted);
-    margin-top: 0.4rem;
-  }
-  .study-metric {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    border-left: 2px solid var(--color-border);
-    padding: 1rem 1.5rem;
-  }
-  .study-metric span {
-    max-width: 200px;
-    font-size: 1rem;
-    color: var(--color-text-secondary);
-  }
-  .career-record {
-    border-top: 1px solid var(--color-border);
-    padding-block: 1.75rem;
-  }
-  .job-heading {
-    margin-bottom: 1.25rem;
-    align-items: center;
-  }
-  .job h2 {
-    font-size: 1.15rem;
-    font-weight: 500;
-  }
-  .job-heading div p {
-    font-size: 1rem;
-    color: var(--color-text-secondary);
-    margin-top: 0.25rem;
-  }
-  .job-date {
-    font-size: 0.95rem;
-    color: var(--color-text-secondary);
-  }
-  ul {
-    padding-left: 1.1rem;
-    margin: 0 0 1rem;
-    max-width: 80ch;
-  }
-  li {
-    font-size: 1rem;
-    color: var(--color-text-secondary);
-    margin-bottom: 0.8rem;
-    padding-left: 0.35rem;
-  }
-  li::marker {
-    color: var(--color-accent);
-  }
+  .job { border-top: 1px solid var(--color-border); padding-block: 2rem; }
+  .job-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem 2rem; }
+  .job h2 { font-family: var(--font-display); font-size: 2rem; font-weight: 400; line-height: 1.2; }
+  .company { color: var(--color-text-secondary); margin-top: 0.5rem; }
+  .job-date { font-size: 0.875rem; color: var(--color-text-secondary); flex-shrink: 0; }
+  .job-summary { max-width: 65ch; margin-block: 1.25rem 2rem; color: var(--color-text-secondary); }
+  .selected-work > .eyebrow { margin-bottom: 1rem; }
+  .contributions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; }
+  .disclosure { margin-top: 1rem; }
+  ul { padding-left: 1.2rem; margin: 0 0 1.5rem; max-width: 85ch; list-style: disc; }
+  li { color: var(--color-text-secondary); margin-bottom: 0.8rem; padding-left: 0.35rem; }
+  li::marker { color: var(--color-accent); }
+  .notes-link { border-top: 1px solid var(--color-border); padding-top: 1.5rem; }
+  .notes-link p { color: var(--color-text-secondary); font-size: 0.875rem; max-width: 75ch; margin-bottom: 0.5rem; }
+  @media (max-width: 950px) { .contributions { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 760px) {
-    .study {
-      padding-block: 2rem;
-    }
-    .integration-figure {
-      padding: 1rem;
-    }
-    .job-heading {
-      gap: 0.5rem;
-    }
-    .comparison {
-      gap: 0.6rem;
-    }
+    .job-heading { flex-direction: column; gap: 0.75rem; }
+    .contributions { grid-template-columns: 1fr; gap: 0; }
   }
 </style>

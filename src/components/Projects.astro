@@ -2,6 +2,9 @@
 import { portfolio } from "../data/portfolio";
 import OrderFlow from "./OrderFlow.astro";
 import ArrowUpRight from "./ArrowUpRight.astro";
+import { getPublishedNotes } from "../data/notes";
+
+const notes = await getPublishedNotes();
 ---
 
 <section
@@ -33,6 +36,16 @@ import ArrowUpRight from "./ArrowUpRight.astro";
             <p class="description">{project.description}</p>
             <p class="stack">{project.techStack.join(" / ")}</p>
             <div class="project-links">
+              {notes
+                .filter((note) => note.data.kind === "personal"
+                  && note.data.projectId === project.id
+                  && note.data.featured)
+                .map((note) => (
+                  <a href={`/notes/${note.id}/`} class="text-link">
+                    <span>Read the note<span class="sr-only">: {note.data.title}</span></span>
+                    <span class="arrow" aria-hidden="true"><ArrowUpRight /></span>
+                  </a>
+                ))}
               <a
                 href={project.githubUrl}
                 class="text-link"
