@@ -1,5 +1,5 @@
 ---
-import { portfolio } from '../data/portfolio'
+import { portfolio } from "../data/portfolio";
 ---
 
 <section id="skills" class="chapter container" aria-labelledby="skills-heading">
@@ -7,25 +7,62 @@ import { portfolio } from '../data/portfolio'
     <div>
       <p class="section-label">Technical toolkit</p>
       <h2 id="skills-heading" class="section-title">Skills</h2>
-      <p class="toolbox-intro">Languages and technologies I work with, chosen for the problem at hand.</p>
+      <p class="toolbox-intro">
+        Languages and technologies I work with, chosen for the problem at hand.
+      </p>
     </div>
     <dl>
-      {(portfolio.skills ?? []).map((group) => (
-        <div class="tool-group">
-          <dt class="eyebrow">{group.category}</dt>
-          <dd>{group.items.map((skill, index) => <><span>{skill.name}</span>{index < group.items.length - 1 && <span class="separator" aria-hidden="true"> / </span>}</>)}</dd>
-        </div>
-      ))}
+      {
+        (portfolio.skills ?? []).map((group) => (
+          <div class="tool-group">
+            <dt class="eyebrow">{group.category}</dt>
+            <dd>
+              {group.items.map((skill, index) => (
+                <>
+                  <span>{skill.name}</span>
+                  {index < group.items.length - 1 && (
+                    <span class="separator" aria-hidden="true">
+                      {" "}
+                      /{" "}
+                    </span>
+                  )}
+                </>
+              ))}
+            </dd>
+          </div>
+        ))
+      }
     </dl>
   </div>
 </section>
 
 <style>
-  .toolbox-intro { max-width: 40ch; font-size: 1rem; color: var(--color-text-secondary); margin-top: 1rem; }
-  dl { margin: 0; }
-  .tool-group { padding-block: 1rem; border-bottom: 1px solid var(--color-border); }
-  .tool-group:first-child { padding-top: 0; }
-  dd { margin: 0.5rem 0 0; font-size: 1rem; line-height: 1.9; }
-  dd span:not(.separator) { white-space: nowrap; }
-  .separator { color: #989b8d; margin-inline: 0.2rem; }
+  .toolbox-intro {
+    max-width: 40ch;
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    margin-top: 1rem;
+  }
+  dl {
+    margin: 0;
+  }
+  .tool-group {
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .tool-group:first-child {
+    padding-top: 0;
+  }
+  dd {
+    margin: 0.5rem 0 0;
+    font-size: 1rem;
+    line-height: 1.9;
+  }
+  dd span:not(.separator) {
+    white-space: nowrap;
+  }
+  .separator {
+    color: #989b8d;
+    margin-inline: 0.2rem;
+  }
 </style>

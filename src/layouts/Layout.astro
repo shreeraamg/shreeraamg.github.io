@@ -1,21 +1,26 @@
 ---
-import '../styles/global.css'
-import { portfolio } from '../data/portfolio'
-import Navbar from '../components/Navbar.astro'
-import Footer from '../components/Footer.astro'
+import "../styles/global.css";
+import { portfolio } from "../data/portfolio";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
 
 interface Props {
-  title?: string
-  description?: string
+  title?: string;
+  description?: string;
+  pageType?: "website" | "article";
 }
 
 const {
-  title = "Shreeraam G — Software Engineer",
-  description = "Backend engineer specialising in Java, Spring Boot, Kafka, and MongoDB. Building scalable event-driven systems."
-} = Astro.props
+  title = "Shreeraam G - Software Engineer",
+  description = "Backend engineer specialising in Java, Spring Boot, Kafka, and MongoDB. Building scalable event-driven systems.",
+  pageType = "website",
+} = Astro.props;
 
-const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/'
-const canonicalUrl = new URL(pathname === '/' ? '/' : `${pathname}/`, Astro.site ?? Astro.url.origin)
+const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const canonicalUrl = new URL(
+  pathname === "/" ? "/" : `${pathname}/`,
+  Astro.site ?? Astro.url.origin,
+);
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -25,7 +30,7 @@ const personSchema = {
   email: `mailto:${portfolio.email}`,
   url: Astro.site?.toString(),
   sameAs: Object.values(portfolio.social ?? {}),
-}
+};
 ---
 
 <!doctype html>
@@ -38,7 +43,7 @@ const personSchema = {
 
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={pageType} />
     <meta property="og:url" content={canonicalUrl.href} />
     <meta property="og:site_name" content="Shreeraam G" />
 
@@ -51,12 +56,18 @@ const personSchema = {
     <link rel="canonical" href={canonicalUrl.href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(personSchema)}
+    />
 
     <meta name="theme-color" content="#f6f3eb" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body id="top">
     <a class="skip-link" href="#main">Skip to content</a>

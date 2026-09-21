@@ -1,53 +1,115 @@
 ---
-import { portfolio } from '../data/portfolio'
+import { portfolio } from "../data/portfolio";
+import ArrowUpRight from "./ArrowUpRight.astro";
 
-const currentJob = portfolio.experience?.find(job => job.endDate === 'present' || job.endDate == null)
+const currentJob = portfolio.experience?.find(
+  (job) => job.endDate === "present" || job.endDate == null,
+);
 ---
 
 <section id="hero" class="container" aria-labelledby="intro-heading">
   <div class="hero-grid reading-grid">
     <div class="hero-copy">
       <p class="eyebrow">Hello, I'm</p>
-      <h1 id="intro-heading">{portfolio.name}<span class="name-period">.</span></h1>
-      <p class="hero-role">{portfolio.role} <span aria-hidden="true">/</span> Backend &amp; distributed systems</p>
-      <p class="intro">I build event-driven backend systems and tools that make developers' work easier.</p>
-      {currentJob && <p class="current-role">Currently a {currentJob.role} at <strong>{currentJob.company}</strong>{currentJob.location && <>, based in {currentJob.location}</>}.</p>}
+      <h1 id="intro-heading">
+        {portfolio.name}<span class="name-period">.</span>
+      </h1>
+      <p class="hero-role">
+        {portfolio.role}
+        <span aria-hidden="true">/</span> Backend &amp; Distributed Systems
+      </p>
+      <p class="intro">
+        I build event-driven backend systems and tools that make developers'
+        work easier.
+      </p>
+      {
+        currentJob && (
+          <p class="current-role">
+            Currently a {currentJob.role} at{" "}
+            <strong>{currentJob.company}</strong>
+            {currentJob.location && <>, based in {currentJob.location}</>}.
+          </p>
+        )
+      }
       <div class="hero-links">
-        <a href="/experience/" class="text-link"><span>Selected work</span><span class="arrow" aria-hidden="true">&#8599;</span></a>
-        <a href={portfolio.resumeUrl} class="text-link"><span>Resume</span><span class="arrow" aria-hidden="true">&#8599;</span></a>
-        <a href={portfolio.social?.github} class="text-link"><span>GitHub</span><span class="arrow" aria-hidden="true">&#8599;</span></a>
+        <a href="/experience/" class="text-link"
+          ><span>Selected work</span><span class="arrow" aria-hidden="true"
+            ><ArrowUpRight /></span
+          ></a
+        >
+        <a href={portfolio.resumeUrl} class="text-link"
+          ><span>Resume</span><span class="arrow" aria-hidden="true"
+            ><ArrowUpRight /></span
+          ></a
+        >
+        <a href={portfolio.social?.github} class="text-link"
+          ><span>GitHub</span><span class="arrow" aria-hidden="true"
+            ><ArrowUpRight /></span
+          ></a
+        >
       </div>
     </div>
     <figure class="field-plate">
       <div class="plate-top figure-label">A note on how I work</div>
       <svg viewBox="0 0 360 280" role="img" aria-labelledby="principle-title">
-        <title id="principle-title">Several complex paths converge into one clear, structured path.</title>
-        <g fill="none" stroke="currentColor" stroke-width="1.2" class="incoming">
-          <path d="M35 60H85V140H159" />
-          <path d="M35 100H65V180H120V140H159" />
-          <path d="M35 140H159" />
-          <path d="M35 180H90V100H135V140H159" />
-          <path d="M35 220H110V140H159" />
+        <title id="principle-title">
+          Several complex paths converge into one clear, structured path.
+        </title>
+        <g
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.2"
+          class="incoming"
+        >
+          <path d="M35 60H85V140H159"></path>
+          <path d="M35 100H65V180H120V140H159"></path>
+          <path d="M35 140H159"></path>
+          <path d="M35 180H90V100H135V140H159"></path>
+          <path d="M35 220H110V140H159"></path>
         </g>
-        <g fill="var(--color-bg-primary)" stroke="currentColor" class="incoming">
-          <circle cx="35" cy="60" r="4" /><circle cx="35" cy="100" r="4" />
-          <circle cx="35" cy="140" r="4" /><circle cx="35" cy="180" r="4" />
-          <circle cx="35" cy="220" r="4" />
+        <g
+          fill="var(--color-bg-primary)"
+          stroke="currentColor"
+          class="incoming"
+        >
+          <circle cx="35" cy="60" r="4"></circle><circle cx="35" cy="100" r="4"
+          ></circle>
+          <circle cx="35" cy="140" r="4"></circle><circle cx="35" cy="180" r="4"
+          ></circle>
+          <circle cx="35" cy="220" r="4"></circle>
         </g>
-        <rect x="159" y="117" width="46" height="46" rx="2" class="junction" />
-        <path d="m174 139 6 6 12-13" fill="none" stroke="var(--color-bg-primary)" stroke-width="1.7" />
-        <path d="M205 140H322m-7-5 7 5-7 5" fill="none" stroke="var(--color-accent)" stroke-width="1.5" />
+        <rect x="159" y="117" width="46" height="46" rx="2" class="junction"
+        ></rect>
+        <path
+          d="m174 139 6 6 12-13"
+          fill="none"
+          stroke="var(--color-bg-primary)"
+          stroke-width="1.7"></path>
+        <path
+          d="M205 140H322m-7-5 7 5-7 5"
+          fill="none"
+          stroke="var(--color-accent)"
+          stroke-width="1.5"></path>
       </svg>
       <figcaption>
-        <span class="caption-title">Making complex systems easier to reason about.</span>
-        <span>Fewer moving parts. Clearer boundaries. That's the kind of engineering I enjoy.</span>
+        <span class="caption-title"
+          >Making complex systems easier to <span class="caption-accent"
+            >reason about</span
+          >.</span
+        >
+        <span
+          >The engineering I enjoy: fewer moving parts and cleaner boundaries.</span
+        >
       </figcaption>
     </figure>
   </div>
 </section>
 
 <style>
-  .hero-grid { align-items: center; padding-block: 4rem; }
+  .hero-grid {
+    align-items: center;
+    padding-block: 4rem;
+  }
   h1 {
     font-family: var(--font-display);
     font-weight: 400;
@@ -56,13 +118,38 @@ const currentJob = portfolio.experience?.find(job => job.endDate === 'present' |
     letter-spacing: -0.045em;
     margin-block: 0.7rem 1rem;
   }
-  .name-period { color: var(--color-accent); }
-  .hero-role { font-size: 1.05rem; font-weight: 500; max-width: 38ch; }
-  .hero-role > span { color: var(--color-accent); margin-inline: 0.25rem; }
-  .intro { max-width: 48ch; margin-block: 1.5rem 1rem; font-size: 1.1rem; }
-  .current-role { max-width: 48ch; font-size: 1rem; color: var(--color-text-secondary); }
-  .current-role strong { font-weight: 500; color: var(--color-text-primary); }
-  .hero-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.75rem; margin-top: 1.75rem; }
+  .name-period {
+    color: var(--color-accent);
+  }
+  .hero-role {
+    font-size: 1.05rem;
+    font-weight: 500;
+    max-width: 38ch;
+  }
+  .hero-role > span {
+    color: var(--color-accent);
+    margin-inline: 0.25rem;
+  }
+  .intro {
+    max-width: 48ch;
+    margin-block: 1.5rem 1rem;
+    font-size: 1.1rem;
+  }
+  .current-role {
+    max-width: 48ch;
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+  }
+  .current-role strong {
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+  .hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.75rem;
+    margin-top: 1.75rem;
+  }
   .field-plate {
     border: 1px solid var(--color-border);
     background-color: #f0ede4;
@@ -73,16 +160,52 @@ const currentJob = portfolio.experience?.find(job => job.endDate === 'present' |
     max-width: 390px;
     justify-self: end;
   }
-  svg { width: 100%; max-height: 195px; display: block; margin-block: 0.5rem; }
-  .incoming { color: #96998c; }
-  .junction { fill: var(--color-accent); }
-  figcaption { padding-top: 1rem; border-top: 1px solid var(--color-border); }
-  figcaption span { display: block; font-size: 0.875rem; color: var(--color-text-secondary); }
-  figcaption .caption-title { font-family: var(--font-display); font-size: 1.65rem; line-height: 1.2; color: var(--color-text-primary); margin-bottom: 0.7rem; }
+  .field-plate > svg {
+    width: 100%;
+    max-height: 195px;
+    display: block;
+    margin-block: 0.5rem;
+  }
+  .incoming {
+    color: #96998c;
+  }
+  .junction {
+    fill: var(--color-accent);
+  }
+  figcaption {
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+  figcaption > span {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+  figcaption .caption-title {
+    font-family: var(--font-display);
+    font-size: 1.65rem;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+    margin-bottom: 0.7rem;
+  }
+  .caption-title .caption-accent {
+    display: inline;
+    font: inherit;
+    color: var(--color-accent);
+  }
   @media (max-width: 760px) {
-    .hero-grid { padding-block: 3rem; }
-    h1 { font-size: clamp(3rem, 10vw, 4.5rem); }
-    .field-plate { max-width: none; justify-self: start; }
-    svg { max-height: 125px; }
+    .hero-grid {
+      padding-block: 3rem;
+    }
+    h1 {
+      font-size: clamp(3rem, 10vw, 4.5rem);
+    }
+    .field-plate {
+      max-width: none;
+      justify-self: start;
+    }
+    .field-plate > svg {
+      max-height: 125px;
+    }
   }
 </style>

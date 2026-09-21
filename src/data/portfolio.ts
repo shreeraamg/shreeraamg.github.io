@@ -1,8 +1,10 @@
 export type Experience = {
+  id: string;
   company: string;
   role: string;
+  summary: string;
   startDate: Date;
-  endDate?: Date | 'present' | null;
+  endDate?: Date | "present" | null;
   location?: string;
   highlights: string[];
 };
@@ -18,51 +20,28 @@ export type Portfolio = {
   interests?: string[];
   experience?: Experience[];
   projects?: Project[];
-  skills?: { category: string; items: { name: string; icon: string; invert?: boolean }[] }[];
-  certifications?: { name: string; issuer: string; year: string; icon: string; credentialUrl: string; invert?: boolean }[];
+  skills?: {
+    category: string;
+    items: { name: string; icon: string; invert?: boolean }[];
+  }[];
+  certifications?: {
+    name: string;
+    issuer: string;
+    year: string;
+    icon: string;
+    credentialUrl: string;
+    invert?: boolean;
+  }[];
 };
 
 export type Project = {
-  id: 'order-platform' | 'life-grid';
+  id: "order-platform" | "life-grid";
   name: string;
   description: string;
   techStack: string[];
   githubUrl: string;
   liveUrl?: string;
 };
-
-export const engineeringStudies = [
-  {
-    number: '01',
-    category: 'Integration architecture',
-    title: 'Consolidating 60+ integration interfaces',
-    constraint: '60+ IBM ACE integration interfaces meant maintaining separate codebases and images for individual interfaces.',
-    decision: 'Consolidated them into a unified Spring Boot microservice, using Helm-templated environment variables and ConfigMap-rendered XSD/XSL files.',
-    outcome: 'Eliminated the need for a new codebase and image for each interface.',
-    metric: '60+',
-    metricLabel: 'interfaces consolidated',
-  },
-  {
-    number: '02',
-    category: 'Developer experience',
-    title: 'Shared build tooling across 80+ services',
-    constraint: 'Version management, configuration, and build logic were repeated across 10 repositories covering 80+ microservices.',
-    decision: 'Built a centralised Gradle BOM and convention plugin to share dependency versions, configuration, and build logic.',
-    outcome: 'Cut version upgrade effort by 60% and eliminated repeated per-service boilerplate.',
-    metric: '60%',
-    metricLabel: 'less version upgrade effort',
-  },
-  {
-    number: '03',
-    category: 'Database performance',
-    title: 'Faster MongoDB-backed APIs',
-    constraint: 'MongoDB-backed APIs needed faster response times.',
-    decision: 'Optimised aggregation pipelines and added targeted indexing.',
-    outcome: 'Reduced API response times by 70%.',
-    metric: '70%',
-    metricLabel: 'lower API response times',
-  },
-];
 
 export const portfolio: Portfolio = {
   name: "Shreeraam G",
@@ -74,8 +53,6 @@ export const portfolio: Portfolio = {
   social: {
     github: "https://github.com/shreeraamg",
     linkedin: "https://linkedin.com/in/shreeraam",
-    leetcode: "https://leetcode.com/u/shreeraam-g/",
-    geeksforgeeks: "https://www.geeksforgeeks.org/profile/shreeraam_03?tab=activity",
   },
 
   about: `Software engineer focused on back-end development.
@@ -87,15 +64,18 @@ event-driven systems in fast-paced collaborative environments.`,
 
   experience: [
     {
+      id: "tcs",
       company: "Tata Consultancy Services",
       role: "System Engineer",
+      summary:
+        "Backend engineering across integration services, developer tooling, data quality, and API performance.",
       startDate: new Date("2024-03-01"),
-      endDate: 'present',
+      endDate: "present",
       location: "Chennai",
       highlights: [
         "Built an event-driven data reconciliation microservice using Kafka and KSQL to automatically validate upstream data against MongoDB records, eliminating manual reconciliation and enabling automated alerting for discrepancies.",
-        "Consolidated 60+ IBM ACE integration interfaces into a unified Spring Boot microservice, replacing per-interface codebases and images with Helm-templated environment variables and ConfigMap-rendered XSD/XSL files, eliminating new-codebase and new-image overhead per interface.",
-        "Designed a centralised Gradle BOM and a convention plugin to abstract version management, configuration, and build logic across 10 repositories (80+ microservices), cutting version upgrade effort by 60% and eliminating repeated per-service boilerplate.",
+        "Migrated 60+ HTTP-to-HTTP interfaces to production using a reusable Spring Boot image with independent Helm deployments and externalised configuration/XSD/XSL resources; the same approach was also adopted in production for Azure Service Bus-to-HTTP and HTTP-to-Azure Service Bus integrations.",
+        "Designed shared Gradle tooling using version catalogs, a BOM, and a convention plugin to centralise dependency management and build logic across 10 repositories (80+ microservices), cutting version-upgrade effort by 60% and reducing repeated per-service build boilerplate.",
         "Created an AI agent using GitHub Copilot that generates Bruno API collections and automated tests from Swagger files, eliminating manual API collection authoring and enabling automated post-deployment validation in CI/CD.",
         "Eliminated CI/CD workflow duplication across 10 repositories by engineering reusable composite GitHub Actions and callable workflows with dynamic inputs and caching, cutting workflow code by 40% and build time by 30% across 150+ workflows.",
         "Optimised MongoDB aggregation pipelines with targeted indexing, reducing API response times by 70%.",
@@ -108,14 +88,26 @@ event-driven systems in fast-paced collaborative environments.`,
     {
       id: "order-platform",
       name: "Distributed Order Fulfillment Platform",
-      description: "A choreographed saga across five Spring Boot microservices coordinated entirely through Kafka events, with per-service Postgres databases, OpenTelemetry observability, and Testcontainers-backed integration tests.",
-      techStack: ["Java", "Spring Boot", "Kafka", "PostgreSQL", "Docker", "Kubernetes", "Helm", "OpenTelemetry"],
-      githubUrl: "https://github.com/shreeraamg/distributed-order-fulfillment-platform",
+      description:
+        "A choreographed saga across five Spring Boot microservices coordinated entirely through Kafka events, with per-service Postgres databases, OpenTelemetry observability, and Testcontainers-backed integration tests.",
+      techStack: [
+        "Java",
+        "Spring Boot",
+        "Kafka",
+        "PostgreSQL",
+        "Docker",
+        "Kubernetes",
+        "Helm",
+        "OpenTelemetry",
+      ],
+      githubUrl:
+        "https://github.com/shreeraamg/distributed-order-fulfillment-platform",
     },
     {
       id: "life-grid",
       name: "Life Grid",
-      description: "A GitHub-contribution-graph style life and age tracker used as a browser homepage.",
+      description:
+        "A GitHub-contribution-graph style life and age tracker used as a browser homepage.",
       techStack: ["HTML", "CSS", "JavaScript"],
       githubUrl: "https://github.com/shreeraamg/life-grid",
       liveUrl: "https://life-grid-sigma.vercel.app/",
@@ -274,7 +266,8 @@ event-driven systems in fast-paced collaborative environments.`,
       issuer: "Anthropic",
       year: "2026",
       icon: "https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/anthropic/default.svg",
-      credentialUrl: "https://www.credly.com/badges/3ebe19a3-1654-4872-849a-64fa4c518349/public_url",
+      credentialUrl:
+        "https://www.credly.com/badges/3ebe19a3-1654-4872-849a-64fa4c518349/public_url",
     },
     {
       name: "GH-300: GitHub Copilot",
@@ -282,7 +275,8 @@ event-driven systems in fast-paced collaborative environments.`,
       year: "2026",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
       invert: true,
-      credentialUrl: "https://learn.microsoft.com/api/credentials/share/en-gb/shreeraamg/B5C07F6DBF83195F?sharingId=C1AEA47DA68654E4",
+      credentialUrl:
+        "https://learn.microsoft.com/api/credentials/share/en-gb/shreeraamg/B5C07F6DBF83195F?sharingId=C1AEA47DA68654E4",
     },
     {
       name: "GH-900: GitHub Foundations",
@@ -290,21 +284,24 @@ event-driven systems in fast-paced collaborative environments.`,
       year: "2026",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
       invert: true,
-      credentialUrl: "https://learn.microsoft.com/api/credentials/share/en-in/shreeraamg/21E346361B79191E?sharingId=C1AEA47DA68654E4",
+      credentialUrl:
+        "https://learn.microsoft.com/api/credentials/share/en-in/shreeraamg/21E346361B79191E?sharingId=C1AEA47DA68654E4",
     },
     {
       name: "Relational to Document Model",
       issuer: "MongoDB",
       year: "2025",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-      credentialUrl: "https://www.credly.com/badges/831bfe1c-3af1-469a-b8e2-3c331889a0d7/public_url",
+      credentialUrl:
+        "https://www.credly.com/badges/831bfe1c-3af1-469a-b8e2-3c331889a0d7/public_url",
     },
     {
       name: "AZ-500: Azure Security Engineer Associate",
       issuer: "Microsoft",
       year: "2025",
       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg",
-      credentialUrl: "https://learn.microsoft.com/api/credentials/share/en-in/shreeraamg/63D9CD29B95DA053?sharingId=C1AEA47DA68654E4",
+      credentialUrl:
+        "https://learn.microsoft.com/api/credentials/share/en-in/shreeraamg/63D9CD29B95DA053?sharingId=C1AEA47DA68654E4",
     },
     {
       name: "100x Devs Full Stack Web Development",

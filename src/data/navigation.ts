@@ -1,22 +1,32 @@
 export const navigation = [
   {
-    href: '/experience/',
-    label: 'Experience',
-    description: 'My professional work and the engineering decisions behind it.',
+    href: "/experience/",
+    label: "Experience",
+    description:
+      "My roles, selected contributions, and the outcomes of my work.",
   },
   {
-    href: '/projects/',
-    label: 'Projects',
-    description: 'Independent builds, experiments, and things made out of curiosity.',
+    href: "/projects/",
+    label: "Projects",
+    description:
+      "Independent builds, experiments, and things made out of curiosity.",
   },
   {
-    href: '/about/',
-    label: 'About',
-    description: 'A little background, my technical toolkit, and what I am learning.',
+    href: "/notes/",
+    label: "Notes",
+    description:
+      "The problems, decisions, and details behind selected work and personal builds.",
   },
   {
-    href: '/contact/',
-    label: 'Contact',
-    description: 'Get in touch about an opportunity, a project, or an interesting problem.',
+    href: "/about/",
+    label: "About",
+    description:
+      "A little background, my technical toolkit, and what I am learning.",
   },
-]
+  {
+    href: "/contact/",
+    label: "Contact",
+    description:
+      "Get in touch about an opportunity, a project, or an interesting problem.",
+  },
+];

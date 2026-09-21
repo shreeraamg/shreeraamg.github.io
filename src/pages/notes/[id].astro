@@ -1,0 +1,143 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import ArrowUpRight from "../../components/ArrowUpRight.astro";
+import { getPublishedNotes } from "../../data/notes";
+import { portfolio } from "../../data/portfolio";
+
+export async function getStaticPaths() {
+  const notes = await getPublishedNotes();
+  return notes.map((note) => ({ params: { id: note.id }, props: { note } }));
+}
+
+interface Props {
+  note: CollectionEntry<"notes">;
+}
+
+const { note } = Astro.props;
+const data = note.data;
+const { Content, headings } = await render(note);
+const contents = headings.filter((heading) => heading.depth === 2);
+const job = data.kind === "work"
+  ? portfolio.experience?.find((job) => job.id === data.experienceId)
+  : undefined;
+const project = data.kind === "personal"
+  ? portfolio.projects?.find((project) => project.id === data.projectId)
+  : undefined;
+const parentHref = data.kind === "work" ? "/experience/" : "/projects/";
+const parentLabel = data.kind === "work" ? "Experience" : "Projects";
+---
+
+<Layout title={`${data.title} | Shreeraam G`} description={data.summary} pageType="article">
+  <article class="chapter container note" aria-labelledby="note-title">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href={parentHref}>{parentLabel}</a>
+      <span aria-hidden="true">/</span>
+      <a href="/notes/">Engineering notes</a>
+    </nav>
+    <header class="note-header">
+      <p class="section-label">
+        {data.kind === "work" ? "Professional work" : "Personal project"} / {data.category}
+      </p>
+      <h1 id="note-title" class="section-title">{data.title}</h1>
+      <p class="note-summary">{data.summary}</p>
+      <p class="context">
+        {job ? `${job.role} at ${job.company}` : project?.name}
+      </p>
+    </header>
+    <div class="note-grid">
+      <div class="note-main">
+        <section class="at-a-glance" aria-labelledby="overview-heading">
+          <h2 id="overview-heading" class="eyebrow">At a glance</h2>
+          <dl>
+            <dt>My contribution</dt>
+            <dd>{data.contribution}</dd>
+            <dt>Outcome</dt>
+            <dd>{data.outcome}</dd>
+            <dt>Tools &amp; technologies</dt>
+            <dd>{data.technologies.join(" / ")}</dd>
+          </dl>
+        </section>
+        {data.kind === "work" ? (
+          <aside class="publication-note" aria-label="Publication scope">
+            Source code is proprietary and cannot be shared. This write-up
+            focuses on the engineering approach and outcomes.
+          </aside>
+        ) : project && (
+          <div class="project-links" aria-label="Project resources">
+            <a href={project.githubUrl} class="text-link" target="_blank" rel="noopener noreferrer">
+              <span>View source<span class="sr-only"> (opens in a new tab)</span></span>
+              <span class="arrow" aria-hidden="true"><ArrowUpRight /></span>
+            </a>
+            {project.liveUrl && (
+              <a href={project.liveUrl} class="text-link" target="_blank" rel="noopener noreferrer">
+                <span>Open project<span class="sr-only"> (opens in a new tab)</span></span>
+                <span class="arrow" aria-hidden="true"><ArrowUpRight /></span>
+              </a>
+            )}
+          </div>
+        )}
+        <div class="note-body"><Content /></div>
+        <footer class="note-footer">
+          <a class="text-link" href={parentHref}>
+            <span>Back to {parentLabel.toLowerCase()}</span>
+            <span class="arrow" aria-hidden="true"><ArrowUpRight /></span>
+          </a>
+          <a class="text-link" href="/notes/">
+            <span>All engineering notes</span>
+            <span class="arrow" aria-hidden="true"><ArrowUpRight /></span>
+          </a>
+        </footer>
+      </div>
+      {contents.length > 0 && (
+        <nav class="note-toc" aria-label="On this page">
+          <p class="eyebrow">On this page</p>
+          <ul>
+            <li><a href="#overview-heading">At a glance</a></li>
+            {contents.map((heading) => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}
+          </ul>
+        </nav>
+      )}
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .breadcrumbs { display: flex; flex-wrap: wrap; gap: 0.75rem; font-size: 0.875rem; margin-bottom: 2rem; color: var(--color-text-secondary); }
+  .note-header { margin-bottom: 2.5rem; }
+  .note-summary { font-size: 1.15rem; color: var(--color-text-secondary); margin-block: 1.25rem 0.75rem; max-width: 60ch; }
+  .context { font-size: 0.875rem; color: var(--color-text-muted); }
+  .note-grid { display: grid; grid-template-columns: minmax(0, 750px) minmax(180px, 1fr); gap: 4rem; align-items: start; }
+  .note-main { min-width: 0; }
+  .at-a-glance { padding: 1.5rem; border: 1px solid var(--color-border); background: var(--color-bg-secondary); }
+  dl { margin-bottom: 0; }
+  dt { font-weight: 500; margin-top: 1rem; }
+  dd { margin: 0.25rem 0 0; color: var(--color-text-secondary); }
+  .publication-note { border-left: 2px solid var(--color-accent); padding-left: 1rem; margin-block: 1.5rem; font-size: 0.875rem; color: var(--color-text-secondary); }
+  .project-links, .note-footer { display: flex; flex-wrap: wrap; gap: 0.5rem 1.75rem; margin-block: 1.5rem; }
+  .note-toc { position: sticky; top: 8rem; border-left: 1px solid var(--color-border); padding-left: 1.5rem; }
+  .note-toc ul { list-style: none; padding: 0; margin: 0.75rem 0 0; }
+  .note-toc a { display: block; padding-block: 0.4rem; font-size: 0.875rem; color: var(--color-text-secondary); text-decoration: none; }
+  .note-toc a:hover { color: var(--color-accent); text-decoration: underline; }
+  .note-body { overflow-wrap: anywhere; }
+  .note-body :global(h2) { font-family: var(--font-display); font-size: 2rem; font-weight: 400; line-height: 1.2; margin-block: 2.5rem 1rem; }
+  .note-body :global(h3) { font-size: 1.2rem; font-weight: 500; margin-block: 1.75rem 0.75rem; }
+  .note-body :global(p), .note-body :global(ul), .note-body :global(ol) { color: var(--color-text-secondary); margin-block: 1rem; line-height: 1.8; }
+  .note-body :global(ul), .note-body :global(ol) { padding-left: 1.5rem; }
+  .note-body :global(ul) { list-style: disc; }
+  .note-body :global(ol) { list-style: decimal; }
+  .note-body :global(li + li) { margin-top: 0.5rem; }
+  .note-body :global(a) { color: var(--color-accent); }
+  .note-body :global(pre) { padding: 1rem; overflow-x: auto; border: 1px solid var(--color-border); margin-block: 1.5rem; font-size: 0.875rem; }
+  .note-body :global(blockquote) { border-left: 2px solid var(--color-accent); padding-left: 1rem; margin-inline: 0; }
+  .note-body :global(img) { height: auto; }
+  .note-footer { border-top: 1px solid var(--color-border); padding-top: 1.5rem; margin-top: 3rem; }
+  @media (max-width: 950px) { .note-grid { gap: 2rem; } .note-toc { top: 10rem; } }
+  @media (max-width: 760px) {
+    .note-grid { display: flex; flex-direction: column; }
+    .note-main { width: 100%; }
+    .note-toc { position: static; order: -1; width: 100%; }
+    .at-a-glance { padding: 1.25rem; }
+  }
+</style>
